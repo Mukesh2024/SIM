@@ -7,8 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class CreateChallengeComponent {
   @Output() closeEvent = new EventEmitter<void>();
+  currentStep: number = 3;
 
-  // JSON structure to hold subjects and topics
+
   subjects = [
     { id: 1, name: "Mathematics", isSelected: true, topics: ["Linear Equations", "Quadratic Equations", "Polynomials", "Algebraic Expressions"] },
     { id: 2, name: "Physics", isSelected: false, topics: ["Laws of Motion (Newton's Laws)", "Circular Motion & Gravitation", "Laws of Thermodynamics", "Motion in a Straight Line"] },
@@ -16,16 +17,24 @@ export class CreateChallengeComponent {
     { id: 4, name: "Biology", isSelected: false, topics: ["Cell Structure", "Genetics", "Human Anatomy", "Ecology & Environment"] }
   ];
 
-  grades = [1, 2, 3, 4, 5, 6, 7, 8, 9]; 
+  grades = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  difficultyLevels = ["Easy", "Medium", "Hard", "Advanced"];
 
   selectedTopic: string = "";
-  selectedGrade:number |null = null;
+  selectedGrade: number | null = 1;
+  selectedDifficulty: string = "Easy";
+  numOfQuestion: number = 5;
+  correctMarks: number = 1;
+  negativeMarks: number = 0;
+  challengeTime: number = 15;
+  challengeName: string = "";
+  allowAIGuidance: boolean = false;
 
-  // Returns only topics from selected subjects
+
   getSelectedTopics(): string[] {
     return this.subjects
-      .filter(subject => subject.isSelected) // Get only selected subjects
-      .flatMap(subject => subject.topics); // Merge topics into one array
+      .filter(subject => subject.isSelected)
+      .flatMap(subject => subject.topics);
   }
 
   getSelectedSubjectsText(): string {
@@ -33,7 +42,34 @@ export class CreateChallengeComponent {
     return selectedNames.length > 0 ? `Topics in ${selectedNames.join(", ")}` : "Select a Subject first";
   }
 
+  previousStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
+    }
+  }
+
+  nextStep() {
+    if (this.currentStep < 3) {
+      this.currentStep++;
+    }
+  }
+
   closeModal() {
     this.closeEvent.emit();
+  }
+
+  submitChallenge() {
+    console.log("Challenge Submitted", {
+      selectedSubjects: this.subjects.filter(s => s.isSelected),
+      selectedTopics: this.getSelectedTopics(),
+      selectedGrade: this.selectedGrade,
+      difficulty: this.selectedDifficulty,
+      numQuestions: this.numOfQuestion,
+      correctMarks: this.correctMarks,
+      negativeMarks: this.negativeMarks,
+      challengeName: this.challengeName,
+      challengeTime: this.challengeTime,
+      allowAIGuidance: this.allowAIGuidance
+    });
   }
 }

@@ -1,46 +1,109 @@
 <div class="modal-overlay">
   <div class="modal-content">
-    <!-- Header -->
     <div class="modal-header">
-      <h2>Create Challenge</h2>
+      <h2 *ngIf="currentStep === 1">Create Challenge</h2>
+      <h2 *ngIf="currentStep === 2">Configure Challenge</h2>
+      <h2 *ngIf="currentStep === 3">Finalize Challenge</h2>
       <button class="close-btn" (click)="closeModal()">✖</button>
     </div>
 
-    <!-- Subject Selection -->
-    <h3>Select Subject</h3>
-    <div class="subject-selection">
-      <label *ngFor="let subject of subjects">
-        <input type="checkbox" [(ngModel)]="subject.isSelected"> {{ subject.name }}
-      </label>
+
+    <div *ngIf="currentStep === 1">
+      <h3>Select Subject</h3>
+      <div class="subject-selection">
+        <label *ngFor="let subject of subjects">
+          <input type="checkbox" [(ngModel)]="subject.isSelected"> {{ subject.name }}
+        </label>
+      </div>
+
+      
+      <div class="topic-selection">
+        <h3>Select Topics</h3>
+        <select [(ngModel)]="selectedTopic">
+          <option value="">{{ getSelectedSubjectsText() }}</option>
+          <option *ngFor="let topic of getSelectedTopics()" value="topic">{{ topic }}</option>
+        </select>
+      </div>
+
+      
+      <div class="topic-list">
+        <span class="topic-badge" *ngFor="let topic of getSelectedTopics()">{{ topic }}</span>
+      </div>
+
+    
+      <div class="topic-selection">
+        <h3>Select Grade (Class)</h3>
+        <select [(ngModel)]="selectedGrade">
+          <option value=""> Select Grade </option>
+          <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+        </select>
+      </div>
     </div>
 
-    <!-- Select Topics Dropdown -->
-    <div class="topic-selection">
-      <h3>Select Topics</h3>
-      <select [(ngModel)]="selectedTopic">
-        <option value="">{{ getSelectedSubjectsText() }}</option>
-        <option *ngFor="let topic of getSelectedTopics()" value="topic">{{ topic }}</option>
-      </select>
+    <div *ngIf="currentStep === 2">
+
+      
+      <h3>Select Difficulty</h3>
+      <div class="subject-selection">
+        <label *ngFor="let level of difficultyLevels">
+          <input type="radio" [(ngModel)]="selectedDifficulty" [value]="level"> {{ level }}
+        </label>
+      </div>
+
+      <h3>Number of Questions (per subject)</h3>
+      <div class="subject-selection">
+        <label *ngFor="let question of [5,10,15,20]">
+          <input type="radio" [(ngModel)]="numOfQuestion" [value]="question"> {{ question }}
+        </label>
+      </div>
+
+      <h3>Total mark for each correct answer</h3>
+      <div class="subject-selection">
+        <label *ngFor="let mark of [1,2,3,4,5]">
+          <input type="radio" [(ngModel)]="correctMarks" [value]="mark"> {{ mark }}
+        </label>
+      </div>
+
+      <h3>Total mark deducted for each wrong answer</h3>
+      <div class="subject-selection">
+        <label *ngFor="let mark of [0,1,2,3,4,5]">
+          <input type="radio" [(ngModel)]="negativeMarks" [value]="mark"> {{ mark }}
+        </label>
+      </div>
+
     </div>
 
-    <!-- Topic List (Badges) -->
-    <div class="topic-list">
-      <span class="topic-badge" *ngFor="let topic of getSelectedTopics()">{{ topic }}</span>
+    <div *ngIf="currentStep === 3">
+
+      <h3>Name of the challenge</h3>
+      <div class="subject-selection">
+        <input style="border:1px solid gray;width: 100%; border-radius: 6px;" type="text" [(ngModel)]="challengeName" placeholder="Enter Challenge Name">        
+        <!-- <p style="color: gray;">Give your challenge a name — it'll be easier to spot and remember later in ‘My Challenges’.</p>  -->
+      </div>
+
+
+      <h3>Total challenge time</h3>
+      <div class="subject-selection">
+        <label *ngFor="let time of [15,30,45,60]">
+          <input type="radio" [(ngModel)]="challengeTime" [value]="time"> {{ time }} min
+        </label>
+      </div>
+
+      <div class="subject-selection">
+        <h3>
+          <input type="checkbox" [(ngModel)]="allowAIGuidance"> Allow AI Guidance on Each Question
+        </h3>
+      </div>
+
     </div>
 
-    <!-- Grade List  -->
-    <div class="topic-selection">
-      <h3>Select Grade (Class)</h3>
-      <select [(ngModel)]="selectedGrade">
-        <option value="" disabled>Select Grade</option>
-        <option *ngFor="let grade in grades" [value]="grade">{{grade}}</option>
-      </select>
-    </div>
-
-    <!-- Footer -->
+   
     <div class="modal-footer">
-      <button class="cancel-btn" (click)="closeModal()">Cancel</button>
-      <button class="continue-btn">Continue →</button>
+      <button *ngIf="currentStep ===1" class="cancel-btn" (click)="closeModal()">Cancel</button>
+      <button *ngIf="currentStep > 1" class="prev-btn" (click)="previousStep()">← Previous</button>
+      <button *ngIf="currentStep < 3" class="continue-btn" (click)="nextStep()">Continue →</button>
+      <button *ngIf="currentStep === 3" class="continue-btn" (click)="submitChallenge()">Submit & Start Challenge
+        →</button>
     </div>
   </div>
 </div>
