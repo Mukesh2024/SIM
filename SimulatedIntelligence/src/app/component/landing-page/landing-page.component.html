@@ -1,0 +1,47 @@
+<div class="container">
+  <aside class="sidebar">
+    
+    <div class="user-profile">
+      <img src="https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" alt="User Avatar" class="user-avatar" />
+      <div class="user-info">
+        <h3>Travis head Travis head</h3>
+      </div>
+    </div>
+
+    
+    <ul>
+      <li (click)="selectTab('dashboard')" [class.active]="selectedTab === 'dashboard'">
+        <span class="icon">🏠</span> My Dashboard
+      </li>
+      <li (click)="selectTab('challenge')" [class.active]="selectedTab === 'challenge'">
+        <span class="icon">🔥</span> My Challenges
+      </li>
+      <li (click)="selectTab('achievement')" [class.active]="selectedTab === 'achievement'">
+        <span class="icon">⭐</span> My Achievements
+      </li>
+      <li (click)="selectTab('learn')" [class.active]="selectedTab === 'learn'">
+        <span class="icon">📖</span> AI Learning
+      </li>      
+    </ul>
+  </aside>
+
+  <!-- Content Section -->
+  <main class="content">
+    <ng-container *ngIf="selectedTab === 'dashboard'">
+      <app-my-dashboard></app-my-dashboard>
+    </ng-container>
+
+    <ng-container *ngIf="selectedTab === 'challenge'">
+      <app-my-challenge></app-my-challenge>
+    </ng-container>
+
+    <ng-container *ngIf="selectedTab === 'achievement'">
+      <app-my-achievements></app-my-achievements>
+    </ng-container>
+
+    <ng-container *ngIf="selectedTab === 'learn'">
+      <app-learn-with-ai> </app-learn-with-ai>
+    </ng-container>
+
+  </main>
+</div>
