@@ -1,1 +1,21 @@
-<p>learn-with-ai works!</p>
+<div class="ai-learning-container">
+    <h2>AI Learning</h2>
+   
+    <div class="search-box">
+      <input type="text" placeholder="Select Subjects or Topics you need to work on" #searchInput (input)="filterTopics(searchInput.value)" 
+      class="search-input">
+      <span class="search-icon">🔍</span>
+    </div>
+  
+    <div class="suggestions">
+      <div class="category" *ngFor="let category of filteredTopics">
+        
+  <h3>{{ category.name }}</h3>
+        <ul>
+          <li *ngFor="let topic of category.topics">
+            {{ topic }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

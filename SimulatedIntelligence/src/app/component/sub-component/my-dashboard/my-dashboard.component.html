@@ -1,26 +1,40 @@
 <div class="container">
-    <h2>Recent Challenges</h2>
-    <button class="btn-create">Create Challenge</button>
-    <div class="challenges-container">
-        <div class="challenge-card" *ngFor="let challenge of recentChallenges">
-            <!-- <img [src]="challenge.image" alt="Challenge Image"> -->
-            <div class="challenge-details">
-                <span>{{challenge.grade}}</span>
-                <h3>{{challenge.title}}</h3>
-                <p>{{challenge.date}}</p>
-                <button class="btn-primary">View Result & AI Analysis</button>
-            </div>
-
-        </div>
+    <div class="heading04">
+      <h2>Recent Challenges</h2>
+      <button class="btn-create">Create Challenge</button>
     </div>
-    <!-- <button class="btn-create">Create Challenge</button> -->
-    <h2> Topics I have Expertise</h2>
+    <div class="challenges-container">
+      <div class="challenge-card" *ngFor="let challenge of recentChallenges">
+        <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
+  
+        <div class="challenge-details">
+          <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
+            {{ challenge.grade }}
+          </span>
+  
+          <h3>{{ challenge.title }}</h3>
+  
+          <p class="challenge-date">
+            {{ challenge.date }}
+          </p>
+  
+          <button class="btn-primary">View Result & AI Analysis</button>
+        </div>
+      </div>
+    </div>
+    <h2>Topics I have Expertise</h2>
     <table class="expertise-table">
-        <tr *ngFor="let topic of expertiseTopics">
-            <td>{{topic.title}}</td>
-            <td><span [ngClass]="getSubjectClass(topic.subject)" class="subject-badge">{{topic.subject}}</span></td>
-            <td>{{topic.questions}} Questions Practised</td>
-            <td>{{topic.accuracy}}% Accuracy</td>
-        </tr>
+      <tr *ngFor="let topic of expertiseTopics">
+        <td>{{ topic.title }}</td>
+        <td>
+          <span
+            [ngClass]="getSubjectClass(topic.subject)"
+            class="subject-badge"
+            >{{ topic.subject }}</span
+          >
+        </td>
+        <td>{{ topic.questions }} Questions Practised</td>
+        <td>{{ topic.accuracy }}% Accuracy</td>
+      </tr>
     </table>
-</div>
+  </div>

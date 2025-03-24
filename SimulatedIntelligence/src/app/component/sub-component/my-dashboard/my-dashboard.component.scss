@@ -2,33 +2,161 @@
     max-width: 900px;
     margin: auto;
     font-family: Arial, sans-serif;
-  }
-   
-  h2 {
+}
+
+h2 {
     margin-top: 20px;
     color: #333;
-  }
-   
-  .challenges-container {
+}
+
+// .challenges-container {
+//     display: flex;
+//     gap: 20px;
+//     overflow-x: auto;
+// }
+
+// .challenge-card {
+//     background: #f9f9f9;
+//     border-radius: 10px;
+//     padding: 15px;
+//     text-align: center;
+//     width: 250px;
+//     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+// }
+
+// .challenge-image {
+//     width: 100%;
+//     height: 100px;
+//     object-fit: cover;
+//     border-radius: 8px;
+// }
+
+.grade {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.grade-high {
+    background: #4caf50;
+    color: white;
+}
+
+.grade-medium {
+    background: #ff9800;
+    color: white;
+}
+
+.grade-low {
+    background: #f44336;
+    color: white;
+}
+
+.btn-primary {
+    background: #ffca28;
+    color: black;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.btn-primary:hover {
+    background: #ffb300;
+}
+
+.subject-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.btn-create {
+    display: block;
+    background: #ffd600;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px auto;
+    width: 200px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.btn-create:hover {
+    background: #ffab00;
+}
+
+.expertise-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.expertise-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.maths {
+    background: #64b5f6;
+    padding: 5px;
+    border-radius: 4px;
+    color: white;
+}
+
+.physics {
+    background: #81c784;
+    padding: 5px;
+    border-radius: 4px;
+    color: white;
+}
+
+
+.heading04 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px!important;
+
+    button {
+        margin: 0px !important;
+    }
+
+}
+.challenges-container {
     display: flex;
     gap: 20px;
     overflow-x: auto;
+    padding: 10px 0;
   }
    
   .challenge-card {
-    background: #f9f9f9;
+    background: #ffffff;
     border-radius: 10px;
     padding: 15px;
     text-align: center;
     width: 250px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
   }
    
   .challenge-image {
     width: 100%;
-    height: 100px;
+    height: 150px;
     object-fit: cover;
     border-radius: 8px;
+  }
+   
+  .challenge-details {
+    margin-top: 10px;
   }
    
   .grade {
@@ -37,22 +165,26 @@
     padding: 5px 10px;
     border-radius: 5px;
     display: inline-block;
-    margin-top: 10px;
+    margin-bottom: 10px;
+    color: white;
   }
    
   .grade-high {
-    background: #4caf50;
-    color: white;
+    background: #4caf50; /* Green */
   }
    
   .grade-medium {
-    background: #ff9800;
-    color: white;
+    background: #ff9800; /* Orange */
   }
    
   .grade-low {
-    background: #f44336;
-    color: white;
+    background: #f44336; /* Red */
+  }
+   
+  .challenge-date {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
   }
    
   .btn-primary {
@@ -69,53 +201,3 @@
   .btn-primary:hover {
     background: #ffb300;
   }
-  .subject-badge {
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
-    font-weight: bold;
-  }
-   
-  .btn-create {
-    display: block;
-    background: #ffd600;
-    padding: 12px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 20px auto;
-    width: 200px;
-    text-align: center;
-    border-radius: 5px;
-  }
-   
-  .btn-create:hover {
-    background: #ffab00;
-  }
-   
-  .expertise-table {
-    width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-  }
-   
-  .expertise-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-  }
-   
-  .maths {
-    background: #64b5f6;
-    padding: 5px;
-    border-radius: 4px;
-    color: white;
-  }
-   
-  .physics {
-    background: #81c784;
-    padding: 5px;
-    border-radius: 4px;
-    color: white;
-  }
-   

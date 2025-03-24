@@ -9,6 +9,7 @@ import { MyChallengeComponent } from './component/sub-component/my-challenge/my-
 import { MyAchievementsComponent } from './component/sub-component/my-achievements/my-achievements.component';
 import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/learn-with-ai.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
