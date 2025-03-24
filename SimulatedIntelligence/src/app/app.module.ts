@@ -8,6 +8,7 @@ import { MyDashboardComponent } from './component/sub-component/my-dashboard/my-
 import { MyChallengeComponent } from './component/sub-component/my-challenge/my-challenge.component';
 import { MyAchievementsComponent } from './component/sub-component/my-achievements/my-achievements.component';
 import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/learn-with-ai.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/le
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
