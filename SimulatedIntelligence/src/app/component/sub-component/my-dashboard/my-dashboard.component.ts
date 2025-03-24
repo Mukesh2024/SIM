@@ -43,7 +43,6 @@ export class MyDashboardComponent {
   }
  
   getSubjectClass(subject: string) {
-  console.log("subject 1",subject);
     return {
       'maths': subject === 'Maths',
       'physics': subject === 'Physics',

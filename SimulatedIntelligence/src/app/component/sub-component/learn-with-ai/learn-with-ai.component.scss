@@ -1,0 +1,70 @@
+.ai-learning-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+   
+  h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+   
+  .search-box {
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+   
+  .search-box input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+   
+  .search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+  }
+   
+  .suggestions {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+   
+  .category {
+    width: 22%;
+  }
+   
+  .category h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+  }
+   
+  .category ul {
+    list-style-type: none;
+    padding: 0;
+  }
+   
+  .category li {
+    font-size: 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+   
+  .category li:hover {
+    color: #007bff;
+    text-decoration: underline;
+  }
