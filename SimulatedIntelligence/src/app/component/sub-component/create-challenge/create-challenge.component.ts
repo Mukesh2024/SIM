@@ -7,7 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class CreateChallengeComponent {
   @Output() closeEvent = new EventEmitter<void>();
-  currentStep: number = 3;
+  currentStep: number = 1;
 
 
   subjects = [
