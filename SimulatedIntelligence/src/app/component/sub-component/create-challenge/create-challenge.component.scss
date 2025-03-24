@@ -1,0 +1,97 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:10px ;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.subject-selection {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 17px;
+}
+
+.subject-selection label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.topic-selection select {
+  width: 100%; /* Adjust width as needed */
+  padding: 8px;
+  font-size: 16px;
+  border: 2px solid black; /* Black border */
+  border-radius: 5px; /* Optional: Rounded corners */
+  background-color: white;
+  cursor: pointer;
+  outline: none; /* Removes default blue outline */
+}
+
+.topic-selection select:focus {
+  border-color: black; /* Keeps the border black when focused */
+}
+
+.topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.topic-badge {
+  background: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 5px;
+  font-size: 12px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.continue-btn {
+  background: #ffb703;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}

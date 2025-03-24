@@ -2,7 +2,8 @@
     <!-- Header Section -->
     <div class="dashboard-header">
       <h2>Recent Challenges</h2>
-      <button class="create-challenge-btn">Create Challenge</button>
+      <button class="create-challenge-btn" (click)="openCreateChallenge()">Create Challenge</button>
+      <app-create-challenge *ngIf="isCreateChallengeOpen" (closeEvent)="isCreateChallengeOpen = false"></app-create-challenge>
     </div>
   
     <!-- Recent Challenges Section (Empty for Now) -->
@@ -12,8 +13,8 @@
   
     <!-- Leave below section blank for now -->
     <div class="extra-section">
-      <p>This is test Paragraph</p>
-      <p>This is test Paragraph 2</p>
+      <p></p>
+      
     </div>
   </div>
   

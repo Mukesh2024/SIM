@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-dashboard.component.scss']
 })
 export class MyDashboardComponent {
+  isCreateChallengeOpen = false;
 
+  openCreateChallenge() {
+    this.isCreateChallengeOpen = true;
+  }
 }
