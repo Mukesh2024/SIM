@@ -1,1 +1,30 @@
-<p>my-challenge works!</p>
+<div class="table-container">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Subject</th>
+          <th>Date</th>
+          <th>Grade</th>
+          <th> Action</th>
+  </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let challenge of challenges  | paginate: {itemsPerPage :6, currentPage: currentPage}">
+        <td>{{challenge.title}}</td>
+  
+        <td>
+          <span [ngClass]="getSubjectClass(challenge.subject)">{{challenge.subject}}</span></td>
+        <td>{{challenge.date}}</td>
+        <td>{{challenge.grade}}</td>
+        <td>
+          <button class="btn-primary" (click)="openAiAnalysis()">View AI Analysis</button>
+        </td>
+  
+      </tr>
+      </tbody>
+    </table>
+    <pagination-controls
+    (pageChange)="currentPage = $event"></pagination-controls>
+  </div>
+  

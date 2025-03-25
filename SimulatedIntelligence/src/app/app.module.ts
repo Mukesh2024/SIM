@@ -8,8 +8,9 @@ import { MyDashboardComponent } from './component/sub-component/my-dashboard/my-
 import { MyChallengeComponent } from './component/sub-component/my-challenge/my-challenge.component';
 import { MyAchievementsComponent } from './component/sub-component/my-achievements/my-achievements.component';
 import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/learn-with-ai.component';
-import { CreateChallengeComponent } from './component/sub-component/create-challenge/create-challenge.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule 
+    NgxPaginationModule,
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
