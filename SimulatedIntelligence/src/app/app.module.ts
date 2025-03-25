@@ -10,6 +10,7 @@ import { MyAchievementsComponent } from './component/sub-component/my-achievemen
 import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/learn-with-ai.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     NgxPaginationModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

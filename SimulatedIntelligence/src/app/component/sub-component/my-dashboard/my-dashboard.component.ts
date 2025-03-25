@@ -26,7 +26,10 @@ export class MyDashboardComponent {
       image: 'assets/biology.jpg'
     }
   ];
- 
+ //recentChallenges object- title, grade, date, image
+ //expertiseTopics object- title, subject, questions, accuracy
+ //getGradeClass- grade
+ //getSubjectClass- subject
   expertiseTopics = [
     { title: 'Trigonometry & Angles Mastery', subject: 'Maths', questions: 100, accuracy: 100 },
     { title: 'Advanced Calculus', subject: 'Maths', questions: 89, accuracy: 90 },
