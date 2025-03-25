@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CreateChallengeComponent } from './component/sub-component/create-challenge/create-challenge.component';
 import { ChallengeRoomPageComponent } from './component/challenge-room/challenge-room.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RelativeTimePipe } from './component/pipes/relative-time.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MyAchievementsComponent,
     LearnWithAiComponent,
     CreateChallengeComponent,
-    ChallengeRoomPageComponent
+    ChallengeRoomPageComponent,
+    RelativeTimePipe
   ],
   imports: [
     BrowserModule,
