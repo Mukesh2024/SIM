@@ -14,6 +14,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateChallengeComponent } from './component/sub-component/create-challenge/create-challenge.component';
 import { ChallengeRoomPageComponent } from './component/challenge-room/challenge-room.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
