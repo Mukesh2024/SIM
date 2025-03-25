@@ -10,7 +10,7 @@
   </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let challenge of challenges  | paginate: {itemsPerPage :6, currentPage: currentPage}">
+      <tr *ngFor="let challenge of allChallenges  | paginate: {itemsPerPage :6, currentPage: currentPage}">
         <td>{{challenge.title}}</td>
   
         <td>
