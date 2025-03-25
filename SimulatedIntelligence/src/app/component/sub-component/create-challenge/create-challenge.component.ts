@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ChallengeService } from '../../services/challenge.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class CreateChallengeComponent {
   /**
    *
    */
-  constructor(private challengeService: ChallengeService) {
+  constructor(private challengeService: ChallengeService, private router: Router) {
 
   }
 
@@ -72,31 +73,41 @@ export class CreateChallengeComponent {
   }
 
   submitChallenge() {
-    const requestBody = {
-      challengeName: this.challengeName,
-      subjectAndTopics: this.subjects
-        .filter(subject => subject.isSelected)
-        .map(subject => ({
-          subject: subject.name,
-          topic: subject.topics,
-        })),
-      difficultyLevel: this.selectedDifficulty,
-      numberOfQuestion: this.numOfQuestion,
-      totalMarksOfEachAnswer: this.correctMarks,
-      totalMarksOfEachCorrectAnswer: this.correctMarks,
-      totalMarksDeductforEachWrongAnswer: this.negativeMarks,
-      totalTimeInMin: this.challengeTime,
-      allowAIGuidence: this.allowAIGuidance
-    };
-    console.log("Challenge Submitted", requestBody);
-    this.challengeService.submitChallenge(requestBody).subscribe({
-      next: response => {
-        console.log("Challenge submission successful", response);
-      },
-      error: err => {
-        console.error("Challenge submission failed", err);
-      }
-    });
-  }
+    if (this.challengeName === "") {
+      alert("Please enter a challenge name");}
+      const requestBody = {
+        challengeName: this.challengeName,
+        subjectAndTopics: this.subjects
+          .filter(subject => subject.isSelected)
+          .map(subject => ({
+            subject: subject.name,
+            topic: subject.topics,
+          })),
+        difficultyLevel: this.selectedDifficulty,
+        numberOfQuestion: this.numOfQuestion * this.subjects.filter(subject => subject.isSelected).length,
+        totalMarksOfEachAnswer: this.correctMarks,
+        totalMarksOfEachCorrectAnswer: this.correctMarks,
+        totalMarksDeductforEachWrongAnswer: this.negativeMarks,
+        totalTimeInMin: this.challengeTime,
+        grade: this.selectedGrade?.toString(),
+        allowAIGuidence: this.allowAIGuidance
+      };
+      console.log("Challenge Submitted", requestBody);
+      this.challengeService.submitChallenge(requestBody).subscribe({
+        next: response => {
+          debugger
+          console.log("Challenge submission successful", response);
+          const challengeId = response;
+          if (challengeId) {
+            this.router.navigate(['/challenge', challengeId]);
+          } else {
+            console.error("Challenge ID not found in response!");
+          }
+        },
+        error: err => {
+          console.error("Challenge submission failed", err);
+        }
+      });
+    }
 
-}
+  }
