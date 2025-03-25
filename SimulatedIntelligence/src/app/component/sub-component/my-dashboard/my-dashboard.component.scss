@@ -201,3 +201,50 @@ h2 {
   .btn-primary:hover {
     background: #ffb300;
   }
+
+  .dashboard-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h2 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .create-challenge-btn {
+    background: #ffb703;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .create-challenge-btn:hover {
+    background: #ffa200;
+  }
+  
+  .recent-challenges {
+   background-color: aliceblues;
+   color: aliceblues;
+  }
+  
+  .extra-section {
+    margin-top: 20px;
+    /* Empty section for future content */
+  }
+  
