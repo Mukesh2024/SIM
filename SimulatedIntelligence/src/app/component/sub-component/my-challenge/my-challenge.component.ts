@@ -20,12 +20,10 @@ export class MyChallengeComponent implements OnInit {
     this.subjectAndTopics = { subject: '', topics: [] };
   }
   ngOnInit(): void {
-    this.dashboardService.getAllChallenges().subscribe((data => { this.allChallenges = data }));
+ 
     this.questionService.getMyChallenges().subscribe((data => { this.myChallenges = data }));
   }
 
-  // challenges object- title, subject, date, grade
-  // getsubject- subject
   currentPage=1;
   getSubjectClass(subject: string) {
     return {

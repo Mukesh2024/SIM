@@ -7,7 +7,7 @@
 
   </div>
   <div class="challenges-container">
-    <div class="challenge-card" *ngFor="let challenge of recentChallenges">
+    <div class="challenge-card" *ngFor="let challenge of myChallenges">
       <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
 
       <div class="challenge-details">
@@ -15,10 +15,10 @@
           {{ challenge.grade }}
         </span>
 
-        <h3>{{ challenge.title }}</h3>
+        <h3>{{ challenge.name }}</h3>
 
         <p class="challenge-date">
-          {{ challenge.date }}
+          {{ challenge.compltedOn | relativeTime }}
         </p>
 
         <button class="btn-primary">View Result & AI Analysis</button>
@@ -27,13 +27,28 @@
   </div>
   <h2>Topics I have Expertise</h2>
   <table class="expertise-table">
-    <tr *ngFor="let topic of expertiseTopics">
-      <td>{{ topic.title }}</td>
-      <td>
-        <span [ngClass]="getSubjectClass(topic.subject)" class="subject-badge">{{ topic.subject }}</span>
-      </td>
-      <td>{{ topic.totalQuestions }} Questions Practised</td>
-      <td>{{ topic.accuracy }}% Accuracy</td>
+    <tr *ngFor="let subjectObj of myChallenges">
+      <td>{{ subjectObj.name }}</td>
+      <ng-container *ngFor="let topic of subjectObj.subjectAndTopics">
+        <!-- Loop through each topic and display its information -->
+        <tr *ngFor="let topicName of topic.topic">
+        
+          <td>
+            <span
+              *ngFor="let subject of subjectObj.subjectAndTopics; let last = last">
+              <span [ngClass]="getSubjectClass(topic.subject)">
+                {{ topic.subject }}
+              </span>
+              &nbsp;
+            </span>
+          </td>
+        
+        </tr>
+      </ng-container>
+      <td>{{ calculateTotalQuestions() }} Questions Practised</td>
+      <td>{{ calculateAccuracy() }}% Accuracy</td>
     </tr>
   </table>
+  
+  
 </div>
