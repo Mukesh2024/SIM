@@ -25,4 +25,7 @@ private apiUrl = 'http://localhost:5109/api/dashboard';
   getSubjectClass(subject: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/get-subject-class/${subject}`);
   }
+  getAllChallenges(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/all-challenges`);
+  }
 }
