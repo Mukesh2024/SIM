@@ -19,7 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MyDashboardComponent,
     MyChallengeComponent,
     MyAchievementsComponent,
-    LearnWithAiComponent
+    LearnWithAiComponent,
+    CreateChallengeComponent
   ],
   imports: [
     BrowserModule,
