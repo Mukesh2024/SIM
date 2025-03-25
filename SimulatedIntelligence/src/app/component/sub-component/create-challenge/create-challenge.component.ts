@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { ChallengeService } from '../../services/challenge.service';
+
 
 @Component({
   selector: 'app-create-challenge',
@@ -9,6 +11,12 @@ export class CreateChallengeComponent {
   @Output() closeEvent = new EventEmitter<void>();
   currentStep: number = 1;
 
+  /**
+   *
+   */
+  constructor(private challengeService: ChallengeService) {
+
+  }
 
   subjects = [
     { id: 1, name: "Mathematics", isSelected: true, topics: ["Linear Equations", "Quadratic Equations", "Polynomials", "Algebraic Expressions"] },
@@ -58,18 +66,49 @@ export class CreateChallengeComponent {
     this.closeEvent.emit();
   }
 
+  // submitChallenge() {
+  //   console.log("Challenge Submitted", {
+  //     selectedSubjects: this.subjects.filter(s => s.isSelected),
+  //     selectedTopics: this.getSelectedTopics(),
+  //     selectedGrade: this.selectedGrade,
+  //     difficulty: this.selectedDifficulty,
+  //     numQuestions: this.numOfQuestion,
+  //     correctMarks: this.correctMarks,
+  //     negativeMarks: this.negativeMarks,
+  //     challengeName: this.challengeName,
+  //     challengeTime: this.challengeTime,
+  //     allowAIGuidance: this.allowAIGuidance
+  //   });
+  // }
+
   submitChallenge() {
-    console.log("Challenge Submitted", {
-      selectedSubjects: this.subjects.filter(s => s.isSelected),
-      selectedTopics: this.getSelectedTopics(),
-      selectedGrade: this.selectedGrade,
-      difficulty: this.selectedDifficulty,
-      numQuestions: this.numOfQuestion,
-      correctMarks: this.correctMarks,
-      negativeMarks: this.negativeMarks,
+    const requestBody = {
       challengeName: this.challengeName,
-      challengeTime: this.challengeTime,
-      allowAIGuidance: this.allowAIGuidance
+      topics: this.subjects
+        .filter(subject => subject.isSelected)
+        .map(subject => ({
+          subject: subject.name,
+          topic: subject.topics,
+        })),
+      difficultyLevel: this.selectedDifficulty,
+      numberOfQuestion: this.numOfQuestion,
+      totalMarksOfEachAnswer: this.correctMarks,
+      totalMarksOfEachCorrectAnswer: this.correctMarks,
+      totalMarksDeductforEachWrongAnswer: this.negativeMarks,
+      totalTimeInMin: this.challengeTime,
+      allowAIGuidence: this.allowAIGuidance
+    };
+
+    console.log("Challenge Submitted", requestBody);
+
+    this.challengeService.submitChallenge(requestBody).subscribe({
+      next: response => {
+        console.log("Challenge submission successful", response);
+      },
+      error: err => {
+        console.error("Challenge submission failed", err);
+      }
     });
   }
+
 }

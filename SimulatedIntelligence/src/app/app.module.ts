@@ -11,6 +11,7 @@ import { LearnWithAiComponent } from './component/sub-component/learn-with-ai/le
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 import { CreateChallengeComponent } from './component/sub-component/create-challenge/create-challenge.component';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CreateChallengeComponent } from './component/sub-component/create-chall
     AppRoutingModule,
     NgxPaginationModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
