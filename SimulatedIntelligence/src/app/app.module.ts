@@ -15,6 +15,7 @@ import { CreateChallengeComponent } from './component/sub-component/create-chall
 import { ChallengeRoomPageComponent } from './component/challenge-room/challenge-room.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ChallengeReviewComponent } from './challenge-review/challenge-review.component';
+import { RelativeTimePipe } from './component/pipes/relative-time.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ChallengeReviewComponent } from './challenge-review/challenge-review.co
     LearnWithAiComponent,
     CreateChallengeComponent,
     ChallengeRoomPageComponent,
-    ChallengeReviewComponent
+    ChallengeReviewComponent,
+    RelativeTimePipe
   ],
   imports: [
     BrowserModule,

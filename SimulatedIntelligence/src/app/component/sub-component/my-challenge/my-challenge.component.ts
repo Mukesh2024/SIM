@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AiAnalysisComponent } from '../view-ai-analysis/view-ai-analysis.component';
 import { DashboardService } from '../../dashboard-services/dashboard.service';
+import { QuestionService } from '../../services/question.service';
 
 @Component({
   selector: 'app-my-challenge',
@@ -10,11 +11,17 @@ import { DashboardService } from '../../dashboard-services/dashboard.service';
 })
 export class MyChallengeComponent implements OnInit {
   allChallenges: any[] = [];
+  myChallenges: any[] = [];
+  subjectAndTopics: { subject: string; topics: string[]; };
   constructor(private dialog: MatDialog,
-    private dashboardService: DashboardService
-  ) {}
+    private dashboardService: DashboardService,
+    private questionService: QuestionService
+  ) {
+    this.subjectAndTopics = { subject: '', topics: [] };
+  }
   ngOnInit(): void {
     this.dashboardService.getAllChallenges().subscribe((data => { this.allChallenges = data }));
+    this.questionService.getMyChallenges().subscribe((data => { this.myChallenges = data }));
   }
 
   // challenges object- title, subject, date, grade
@@ -22,10 +29,10 @@ export class MyChallengeComponent implements OnInit {
   currentPage=1;
   getSubjectClass(subject: string) {
     return {
-      'maths': subject === 'maths',
-      'physics': subject === 'physics',
-      'chemistry': subject === 'chemistry',
-      'biology': subject === 'biology'
+      'Math': subject === 'Math',
+      'Physics': subject === 'Physics',
+      'Chemistry': subject === 'Chemistry',
+      'Biology': subject === 'Biology'
     };
   }
    openAiAnalysis() {
