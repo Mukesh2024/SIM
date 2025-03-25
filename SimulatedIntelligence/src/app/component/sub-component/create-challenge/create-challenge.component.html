@@ -29,13 +29,13 @@
         <h3>Select Topics</h3>
         <select [(ngModel)]="selectedTopic">
           <option value="">{{ getSelectedSubjectsText() }}</option>
-          <option *ngFor="let topic of getSelectedTopics()" value="topic">{{ topic }}</option>
+          <option *ngFor="let topic of getDefaultTopics()" value="topic">{{ topic }}</option>
         </select>
       </div>
 
       
       <div class="topic-list">
-        <span class="topic-badge" *ngFor="let topic of getSelectedTopics()">{{ topic }}&nbsp;&nbsp;&nbsp;<span><strong>X</strong></span></span>
+        <span class="topic-badge" *ngFor="let topic of getDefaultTopics()">{{ topic }}&nbsp;&nbsp;&nbsp;<span><strong>X</strong></span></span>
       </div>
 
     </div>
@@ -46,7 +46,7 @@
       <h3>Select Difficulty</h3>
       <div class="subject-selection">
         <label *ngFor="let level of difficultyLevels">
-          <input type="radio" [(ngModel)]="selectedDifficulty" [value]="level"> {{ level }}
+          <input type="radio" [(ngModel)]="selectedDifficulty" [value]="level.value"> {{ level.name }}
         </label>
       </div>
 

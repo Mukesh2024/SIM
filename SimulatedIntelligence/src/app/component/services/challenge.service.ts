@@ -12,6 +12,6 @@ export class ChallengeService {
   constructor(private http: HttpClient) { }
 
   submitChallenge(challengeData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/GenerateQuestion`, challengeData);
+    return this.http.post(`${this.baseUrl}/Question/GenerateQuestion`, challengeData);
   }
 }

@@ -26,11 +26,16 @@ export class CreateChallengeComponent {
   ];
 
   grades = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  difficultyLevels = ["Easy", "Medium", "Hard", "Advanced"];
+  difficultyLevels = [
+    { name: "Easy", value: 0 },
+    { name: "Medium", value: 1 },
+    { name: "Hard", value: 2 },
+    { name: "Advanced", value: 3 }
+  ];
 
   selectedTopic: string = "";
   selectedGrade: number | null = 1;
-  selectedDifficulty: string = "Easy";
+  selectedDifficulty: number = 0;
   numOfQuestion: number = 5;
   correctMarks: number = 1;
   negativeMarks: number = 0;
@@ -39,7 +44,7 @@ export class CreateChallengeComponent {
   allowAIGuidance: boolean = false;
 
 
-  getSelectedTopics(): string[] {
+  getDefaultTopics(): string[] {
     return this.subjects
       .filter(subject => subject.isSelected)
       .flatMap(subject => subject.topics);
@@ -66,25 +71,10 @@ export class CreateChallengeComponent {
     this.closeEvent.emit();
   }
 
-  // submitChallenge() {
-  //   console.log("Challenge Submitted", {
-  //     selectedSubjects: this.subjects.filter(s => s.isSelected),
-  //     selectedTopics: this.getSelectedTopics(),
-  //     selectedGrade: this.selectedGrade,
-  //     difficulty: this.selectedDifficulty,
-  //     numQuestions: this.numOfQuestion,
-  //     correctMarks: this.correctMarks,
-  //     negativeMarks: this.negativeMarks,
-  //     challengeName: this.challengeName,
-  //     challengeTime: this.challengeTime,
-  //     allowAIGuidance: this.allowAIGuidance
-  //   });
-  // }
-
   submitChallenge() {
     const requestBody = {
       challengeName: this.challengeName,
-      topics: this.subjects
+      subjectAndTopics: this.subjects
         .filter(subject => subject.isSelected)
         .map(subject => ({
           subject: subject.name,
@@ -98,9 +88,7 @@ export class CreateChallengeComponent {
       totalTimeInMin: this.challengeTime,
       allowAIGuidence: this.allowAIGuidance
     };
-
     console.log("Challenge Submitted", requestBody);
-
     this.challengeService.submitChallenge(requestBody).subscribe({
       next: response => {
         console.log("Challenge submission successful", response);
