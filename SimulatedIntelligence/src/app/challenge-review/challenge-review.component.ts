@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./challenge-review.component.scss']
 })
 export class ChallengeReviewComponent {
+  showSummary = true;
 
+  toggleSummary() {
+    this.showSummary = !this.showSummary;
+  }
 }

@@ -10,11 +10,11 @@
       </div>
   
       <!-- Section Label -->
-      <div class="font-semibold text-sm text-gray-600 mb-2">Summary →</div>
+      <div (click)="toggleSummary()" class="font-semibold text-sm text-gray-600 mb-2">Summary →</div>
   
       <!-- Mathematics Section -->
       <div class="mb-6">
-        <div class="font-medium mb-2">Mathematics (4/5)</div>
+        <!-- <div class="font-medium mb-2">Mathematics (4/5)</div> -->
         <div class="flex flex-col gap-2">
           <button class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm hover:bg-green-50">
             Question 1 <span class="text-green-600">✔️</span>
@@ -31,13 +31,6 @@
           <button class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm hover:bg-yellow-100">
             Question 5 <span class="text-yellow-500">❔</span>
           </button>
-        </div>
-      </div>
-  
-      <!-- Physics Section -->
-      <div>
-        <div class="font-medium mb-2">Physics (1/5)</div>
-        <div class="flex flex-col gap-2">
           <button class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm hover:bg-green-50">
             Question 6 <span class="text-green-600">✔️</span>
           </button>
@@ -55,11 +48,45 @@
           </button>
         </div>
       </div>
+  
     </aside>
   
     <!-- Main Content -->
     <main class="flex-1 p-10  shadow-inner">
         <div class="bg-white p-6 rounded shadow">
+            <h1 class="text-xl font-semibold mb-2">IIT JEE 2026 Preparation Mockup Test</h1>
+                <div class="bg-white rounded-lg shadow p-6">
+                  <p class="text-lg font-medium mb-4">
+                    <span class="text-gray-500 font-bold">Q.1</span>
+                    If current I flows through a wire of length L, the magnetic field at a point on the axis of a circular loop (radius R) made from it is proportional to:
+                  </p>
+          
+                  <div class="mb-4">
+                    <p class="font-semibold text-green-700">Your Answer</p>
+                    <p class="bg-green-500 text-white px-4 py-2 rounded w-100">A | L/R</p>
+                  </div>
+          
+                  <div class="mb-4">
+                    <p class="font-semibold text-green-700">Correct Answer</p>
+                    <p class="bg-green-500 text-white px-4 py-2 rounded w-100">A | L/R</p>
+                  </div>
+          
+                  <div class="mt-6">
+                    <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                      This is based on the Biot–Savart Law and Ampere's Law for a circular current-carrying loop.<br/><br/>
+                      &bull; When a wire of length L is bent into a circular loop of radius R, the total magnetic field B at the center (or axis) of the loop is:
+                      <br/>
+                      <code>B ∝ &mu;₀IR² / (R² + x²)<sup>3/2</sup></code> (for a point on the axis)<br/><br/>
+                      However, when L is converted into a loop, R depends on L (since L = 2πR):<br/>
+                      <code>R = L / 2π</code><br/><br/>
+                      Plugging into the Biot–Savart expression and simplifying gives us:<br/>
+                      <code>B ∝ L / R</code>
+                    </p>
+                  </div>
+                </div>
+        </div>
+    <div ng-if="showSummary" class="bg-white p-6 rounded shadow">
       <h2 class="text-2xl font-semibold mb-8 border-b pb-2">IIT JEE 2026 Preparation Mockup Test</h2>
   
       <!-- Math Section -->
