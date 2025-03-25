@@ -9,6 +9,14 @@
 
 
     <div *ngIf="currentStep === 1">
+      <div class="topic-selection">
+        <h3>Select Grade (Class)</h3>
+        <select [(ngModel)]="selectedGrade">
+          <option value=""> Select Grade </option>
+          <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
+        </select>
+      </div>
+      <br/>
       <h3>Select Subject</h3>
       <div class="subject-selection">
         <label *ngFor="let subject of subjects">
@@ -27,17 +35,9 @@
 
       
       <div class="topic-list">
-        <span class="topic-badge" *ngFor="let topic of getSelectedTopics()">{{ topic }}</span>
+        <span class="topic-badge" *ngFor="let topic of getSelectedTopics()">{{ topic }}&nbsp;&nbsp;&nbsp;<span><strong>X</strong></span></span>
       </div>
 
-    
-      <div class="topic-selection">
-        <h3>Select Grade (Class)</h3>
-        <select [(ngModel)]="selectedGrade">
-          <option value=""> Select Grade </option>
-          <option *ngFor="let grade of grades" [value]="grade">{{ grade }}</option>
-        </select>
-      </div>
     </div>
 
     <div *ngIf="currentStep === 2">
