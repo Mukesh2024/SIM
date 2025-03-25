@@ -7,13 +7,20 @@ import { Component } from '@angular/core';
 })
 export class ChallengeRoomPageComponent {
   showModal = false;
+  showResult = false;
 
   openModal() {
-    console.log("Fwefewwe")
     this.showModal = true;
   }
 
   closeModal() {
     this.showModal = false;
+  }
+
+  openResultModal() {
+    this.showResult = true;
+  }
+  closeResultModal() {
+    this.showResult = false;
   }
 }
