@@ -53,5 +53,11 @@ export class MyDashboardComponent {
       'bio': subject === 'Bio'
     };
   }
+
+  isCreateChallengeOpen = false;
+
+  openCreateChallenge() {
+    this.isCreateChallengeOpen = true;
+  }
   
 }
