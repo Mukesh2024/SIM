@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChallengeService } from '../services/challenge.service';
 import { ActivatedRoute } from '@angular/router';
+import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 
 @Component({
   selector: 'app-challenge-room-page',
@@ -17,11 +18,13 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
 
   maxMarks: number = 10;
   negativeMarking: number = 0;
-  difficulty: string = 'Easy';
-  challengeTime: string = '30 Minutes';
+  difficulty: DifficultyLevel = DifficultyLevel.Easy;
+  challengeTime: string = '';
+  challengeName: string = '';
+
 
   // Timer related
-  totalTimeInSeconds: number = 30 * 60; 
+  totalTimeInSeconds: number =0;
   timeLeft: string = '';
   private timerInterval: any;
 
@@ -48,12 +51,21 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
 
   fetchChallengeData(challengeId: string) {
     this.challengeService.getQuestion(challengeId).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         debugger;
-        if (Array.isArray(response)) { 
-          this.questions = response;   
-            // this.difficulty = response.difficulty || "Easy";
-            // this.challengeTime = response.challengeTime || "30 Minutes";
+        if (response.questionCollections) {
+          this.questions = response.questionCollections;
+          const difficultyStr = response.questionDetails.difficultyLevel || 'Easy-Level';
+          this.difficulty = this.mapDifficultyLevel(difficultyStr);
+
+          const totalTime = response.questionDetails.totalTimeInMin;
+          this.challengeTime = totalTime ? `${totalTime} Minutes` : '30 Minutes';
+          this.totalTimeInSeconds = totalTime ? totalTime * 60 : 30 * 60;
+
+          this.challengeName = response.questionDetails.challengeName || "";
+          this.maxMarks = response.questionDetails.numberOfQuestion * response.questionDetails.totalMarksOfEachCorrectAnswer;
+          this.negativeMarking = response.questionDetails.totalMarksDeductforEachWrongAnswer;
+        
 
         } else {
           console.error("Invalid response structure", response);
@@ -66,7 +78,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   }
 
   startTimer() {
-    this.updateTimeDisplay(); 
+    this.updateTimeDisplay();
     this.timerInterval = setInterval(() => {
       if (this.totalTimeInSeconds > 0) {
         this.totalTimeInSeconds--;
@@ -74,7 +86,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
       } else {
         clearInterval(this.timerInterval);
         this.timeLeft = '00:00';
-        this.openResultModal(); 
+        this.openResultModal();
       }
     }, 1000);
   }
@@ -107,5 +119,14 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   getAttemptedCount(): number {
     return Object.keys(this.answers).length;
   }
- 
+
+  mapDifficultyLevel(level: string): DifficultyLevel {
+    const mapping: { [key: string]: DifficultyLevel } = {
+      'Easy-Level': DifficultyLevel.Easy,
+      'Medium-Level': DifficultyLevel.Medium,
+      'Hard-Level': DifficultyLevel.Hard,
+      'Advanced-Level': DifficultyLevel.Advanced
+    };
+    return mapping[level] || DifficultyLevel.Easy;
+  }
 }
