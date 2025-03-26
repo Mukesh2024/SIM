@@ -26,7 +26,8 @@ export class CreateChallengeComponent {
     { id: 4, name: "Biology", isSelected: false, topics: ["Cell Structure", "Genetics", "Human Anatomy", "Ecology & Environment"] }
   ];
 
-  grades = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  grades = ["Grade-1", "Grade-2", "Grade-3", "Grade-4", "Grade-5", "Grade-6", "Grade-7", "Grade-8", "Grade-9"]
+  ;
   difficultyLevels = [
     { name: "Easy", value: 0 },
     { name: "Medium", value: 1 },
@@ -35,7 +36,7 @@ export class CreateChallengeComponent {
   ];
 
   selectedTopic: string = "";
-  selectedGrade: number | null = 1;
+  selectedGrade: string = "Grade-1";
   selectedDifficulty: number = 0;
   numOfQuestion: number = 5;
   correctMarks: number = 1;
@@ -91,7 +92,7 @@ export class CreateChallengeComponent {
         totalMarksOfEachCorrectAnswer: this.correctMarks,
         totalMarksDeductforEachWrongAnswer: this.negativeMarks,
         totalTimeInMin: this.challengeTime,
-        grade: this.selectedGrade?.toString(),
+        grade: this.selectedGrade,
         allowAIGuidence: this.allowAIGuidance
       };
       this.loader = true;

@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class QuestionService {
 
-  private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api/Question'; // Replace with your actual API URL
-
+  //private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api/Question'; // Replace with your actual API URL
+  private baseUrl = 'http://localhost:5109/api/Question';
   constructor(private http: HttpClient) { }
 
   submitChallenge(challengeData: any): Observable<any> {
