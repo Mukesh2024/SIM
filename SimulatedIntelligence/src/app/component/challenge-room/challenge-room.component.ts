@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-challenge-room-page',
   templateUrl: './challenge-room.component.html',
-  styleUrls: ['./challenge-room.component.scss']
+  styleUrls: ['./landing-page.component.scss']
 })
 export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   showModal = false;

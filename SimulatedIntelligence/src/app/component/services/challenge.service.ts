@@ -17,8 +17,6 @@ export class ChallengeService {
   
 
   getQuestion(id: string): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Question/GetQuestion`, JSON.stringify({ id }), {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    });
+    return this.http.get<any>(`${this.baseUrl}/Question/GetQuestion?model=${id}`);
   }
 }
