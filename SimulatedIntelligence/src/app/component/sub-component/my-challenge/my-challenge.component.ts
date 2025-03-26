@@ -13,6 +13,8 @@ export class MyChallengeComponent implements OnInit {
   allChallenges: any[] = [];
   myChallenges: any[] = [];
   subjectAndTopics: { subject: string; topics: string[]; };
+  showAIAnalysis:boolean = false;
+
   constructor(private dialog: MatDialog,
     private dashboardService: DashboardService,
     private questionService: QuestionService
@@ -23,6 +25,7 @@ export class MyChallengeComponent implements OnInit {
  
     this.questionService.getMyChallenges().subscribe((data => { this.myChallenges = data }));
   }
+  
 
   currentPage=1;
   getSubjectClass(subject: string) {
@@ -34,22 +37,22 @@ export class MyChallengeComponent implements OnInit {
     };
   }
    openAiAnalysis() {
-    console.log('Opening AI Analysis dialog...');
-    this.dialog.open(AiAnalysisComponent, {
-          width: '500px',
-          data: {
-            userName: 'Harry',
-            maxMarks: 10,
-            marksObtained: 9,
-            incorrectAnswers: 1,
-            unattempted: 1,
-            accuracy: 90,
-            recommendations: [
-              'You should revise Algebraic Expressions and Thermodynamics.',
-              "You're strong in Coordinate Geometry – keep it up!",
-              'Based on your pace, try a 15-minute Medium challenge next.'
-            ]
-          }
-        });
+    this.showAIAnalysis = true;
+    // this.dialog.open(AiAnalysisComponent, {
+    //       width: '500px',
+    //       data: {
+    //         userName: 'Harry',
+    //         maxMarks: 10,
+    //         marksObtained: 9,
+    //         incorrectAnswers: 1,
+    //         unattempted: 1,
+    //         accuracy: 90,
+    //         recommendations: [
+    //           'You should revise Algebraic Expressions and Thermodynamics.',
+    //           "You're strong in Coordinate Geometry – keep it up!",
+    //           'Based on your pace, try a 15-minute Medium challenge next.'
+    //         ]
+    //       }
+    //     });
       }
 }

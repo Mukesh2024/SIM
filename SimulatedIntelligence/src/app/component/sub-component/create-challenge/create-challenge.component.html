@@ -4,11 +4,16 @@
       <h2 *ngIf="currentStep === 1">Create Challenge</h2>
       <h2 *ngIf="currentStep === 2">Configure Challenge</h2>
       <h2 *ngIf="currentStep === 3">Finalize Challenge</h2>
-      <button class="close-btn" (click)="closeModal()">✖</button>
+      <button class="close-btn" (click)="closeModal()"></button>
+    </div>
+
+    
+    <div *ngIf="loader" class="loader-container">
+      <span class="loader"></span>
     </div>
 
 
-    <div *ngIf="currentStep === 1">
+    <div *ngIf="currentStep === 1 && !loader">
       <div class="topic-selection">
         <h3>Select Grade (Class)</h3>
         <select [(ngModel)]="selectedGrade">
@@ -41,7 +46,7 @@
 
     </div>
 
-    <div *ngIf="currentStep === 2">
+    <div *ngIf="currentStep === 2 && !loader">
 
 
       <h3>Select Difficulty</h3>
@@ -74,7 +79,7 @@
 
     </div>
 
-    <div *ngIf="currentStep === 3">
+    <div *ngIf="currentStep === 3 && !loader">
 
       <h3>Name of the challenge</h3>
       <div class="subject-selection">
