@@ -1,10 +1,12 @@
-<div class="container">
+<div class="w-full flex p-8 wrapper">
   <aside class="sidebar">
-    
     <div class="user-profile">
-      <img src="https://i.pravatar.cc/250?u=mail@ashallendesign.co.uk" alt="User Avatar" class="user-avatar" />
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsFikiVeZsqKvKabvMctua-v8sEenvS1P2jw&s" alt="User Avatar" class="user-avatar" />
       <div class="user-info">
-        <h3>Travis head Travis head</h3>
+        <h3 class="username">Harry Potter</h3>
+        <span class="user-stats text-gray-600">
+          +100 XP
+        </span>
       </div>
     </div>
 
@@ -16,9 +18,9 @@
       <li (click)="selectTab('challenge')" [class.active]="selectedTab === 'challenge'">
         <span class="icon">🔥</span> My Challenges
       </li>
-      <li (click)="selectTab('achievement')" [class.active]="selectedTab === 'achievement'">
+      <!-- <li (click)="selectTab('achievement')" [class.active]="selectedTab === 'achievement'">
         <span class="icon">⭐</span> My Achievements
-      </li>
+      </li> -->
       <li (click)="selectTab('learn')" [class.active]="selectedTab === 'learn'">
         <span class="icon">📖</span> AI Learning
       </li>      

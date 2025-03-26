@@ -2,3 +2,48 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+body {
+    --dot-bg: #f4f4f4;
+    --dot-color: #acacac;
+    --dot-size: 1px;
+    --dot-space: 12px;
+    background: linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space), linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space), var(--dot-color);
+    min-height: 100vh;
+    
+}
+
+* {
+    font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.sidebar {
+    background: #fff !important;
+    padding: 1rem !important;
+    border-radius: 10px !important;
+    border: 1px solid #dddddd !important;
+    width: auto;
+}
+.wrapper {
+    gap: 2rem;
+}
+
+button {
+    background: #ffca28;
+    color: black;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer !important;
+    border-radius: 8px !important;
+}
+
+.sidebar li:hover {
+    background: #00000012 !important;
+    color: #333333 !important;
+}

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-private apiUrl = 'http://localhost:5109/api/dashboard';
+private apiUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api/dashboard';
  
   constructor(private http: HttpClient) {}
  
