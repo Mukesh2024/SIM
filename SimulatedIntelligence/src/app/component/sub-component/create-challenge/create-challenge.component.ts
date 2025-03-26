@@ -44,6 +44,8 @@ export class CreateChallengeComponent {
   challengeName: string = "";
   allowAIGuidance: boolean = false;
 
+  loader = true;
+
 
   getDefaultTopics(): string[] {
     return this.subjects
@@ -92,19 +94,19 @@ export class CreateChallengeComponent {
         grade: this.selectedGrade?.toString(),
         allowAIGuidence: this.allowAIGuidance
       };
-      console.log("Challenge Submitted", requestBody);
+      this.loader = true;
       this.challengeService.submitChallenge(requestBody).subscribe({
         next: response => {
-          debugger
-          console.log("Challenge submission successful", response);
           const challengeId = response;
           if (challengeId) {
             this.router.navigate(['/challenge', challengeId]);
           } else {
             console.error("Challenge ID not found in response!");
           }
+          this.loader = false;
         },
         error: err => {
+          this.loader = false;
           console.error("Challenge submission failed", err);
         }
       });

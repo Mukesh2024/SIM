@@ -4,7 +4,12 @@
       <h2 *ngIf="currentStep === 1">Create Challenge</h2>
       <h2 *ngIf="currentStep === 2">Configure Challenge</h2>
       <h2 *ngIf="currentStep === 3">Finalize Challenge</h2>
-      <button class="close-btn" (click)="closeModal()">✖</button>
+      <button class="close-btn" (click)="closeModal()"></button>
+    </div>
+
+    
+    <div *ngIf="loader" class="loader-container">
+      <span class="loader"></span>
     </div>
 
 
