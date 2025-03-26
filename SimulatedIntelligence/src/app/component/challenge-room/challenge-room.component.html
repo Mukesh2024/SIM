@@ -7,7 +7,8 @@
       <div class="mb-6 text-center">
         <img src="https://i.pravatar.cc/100" alt="User" class="rounded-full w-16 h-16 mx-auto" />
         <div class="font-semibold mt-2">Harry Potter</div>
-        <div class="text-sm text-green-600">+340 XP</div>
+        <!-- <div class="text-sm text-green-600">+340 XP</div> -->
+        <div><strong>Grade:</strong> {{ grade }}</div>
       </div>
 
       <div class="mb-4">
@@ -31,7 +32,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6">
       <div class="bg-white p-6 rounded shadow">
-        <h2 class="text-lg font-semibold mb-1">IIT JEE 2026 Preparation Mockup Test</h2>
+        <h2 class="text-lg font-semibold mb-1">{{challengeName}}</h2>
         <h3 class="text-gray-500 text-xl font-medium mb-4">Q.{{ currentQuestionIndex + 1 }}</h3>
         <p class="mb-6">
           {{ questions[currentQuestionIndex]?.questionText }}
@@ -182,13 +183,13 @@
 
       <!-- Action Buttons -->
       <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
-        <button class="bg-lime-400 hover:bg-lime-500 text-white px-4 py-2 rounded font-semibold w-full md:w-auto">
+        <button style="font-weight: 500 !important;" class="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded w-full md:w-auto text-black">
           ← Retake Test
         </button>
-        <button class="bg-indigo-300 hover:bg-indigo-400 text-white px-4 py-2 rounded font-semibold w-full md:w-auto">
+        <button style="font-weight: 500 !important;" class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
           Review Answer Sheet
         </button>
-        <button class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded font-semibold w-full md:w-auto">
+        <button style="font-weight: 500 !important;" class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
           Go to Dashboard →
         </button>
       </div>

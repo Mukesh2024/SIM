@@ -1,7 +1,9 @@
 <div class="w-full wrapper">
   <div class="heading04">
     <h2>Recent Challenges</h2>
-    <button class="create-challenge-btn" (click)="openCreateChallenge()">Create Challenge</button>
+    <button class="create-challenge-btn" (click)="openCreateChallenge()">
+      Create Challenge
+    </button>
     <app-create-challenge *ngIf="isCreateChallengeOpen"
       (closeEvent)="isCreateChallengeOpen = false"></app-create-challenge>
 

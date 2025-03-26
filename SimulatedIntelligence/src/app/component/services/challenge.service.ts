@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ChallengeService {
 
-  private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api'; // Replace with your actual API URL
+  // private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api'; // Replace with your actual API URL
+  private baseUrl = 'http://localhost:5109/api'; // Replace with your actual API URL
 
   constructor(private http: HttpClient) { }
 
