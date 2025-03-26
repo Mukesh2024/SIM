@@ -25,7 +25,7 @@
             <span [ngClass]="getSubjectClass(topic.subject)">
               {{ topic.subject }}
             </span>
-            <span *ngIf="!last">, </span>
+            &nbsp;
           </span>
         </td>
         <td>{{ challenge.compltedOn | relativeTime }}</td>

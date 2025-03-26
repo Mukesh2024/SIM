@@ -7,17 +7,18 @@
 
   </div>
   <div class="challenges-container">
-    <div class="challenge-card" *ngFor="let challenge of recentChallenges">
-      
+    <div class="challenge-card" *ngFor="let challenge of myChallenges">
+      <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
+
       <div class="challenge-details">
         <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
           {{ challenge.grade }}
         </span>
 
-        <h3>{{ challenge.title }}</h3>
+        <h3>{{ challenge.name }}</h3>
 
         <p class="challenge-date">
-          {{ challenge.date }}
+          {{ challenge.compltedOn | relativeTime }}
         </p>
 
         <button class="btn-primary">View Result & AI Analysis</button>
