@@ -44,7 +44,7 @@ export class CreateChallengeComponent {
   challengeName: string = "";
   allowAIGuidance: boolean = false;
 
-  loader = true;
+  loader = false;
 
 
   getDefaultTopics(): string[] {
