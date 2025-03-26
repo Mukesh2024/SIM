@@ -36,43 +36,64 @@
     <!-- Main Content -->
     <main class="flex-1 p-10  shadow-inner">
         <div class="bg-white p-6 rounded shadow">
-            <h1 class="text-xl font-semibold mb-2">IIT JEE 2026 Preparation Mockup Test</h1>
+            <h1 class="text-xl font-semibold mb-2">{{details.challengeName}}</h1>
                 <div class="bg-white rounded-lg shadow p-6" *ngIf="selectedQuestionDetail">
                   <p class="text-lg font-medium mb-4">
                     <span class="text-gray-500 font-bold">Q.{{index +1}}</span>
-                    {{selectedQuestionDetail.question}}
+                    {{selectedQuestionDetail.questionText}}
                   </p>
           
-                  <div class="mb-4">
-                    <p class="font-semibold text-green-700">Your Answer</p>
-                    <p class="bg-green-500 text-white px-4 py-2 rounded w-100">  {{selectedQuestionDetail.answer}}</p>
+                  <div class="mb-4" >
+                    <p *ngIf="selectedQuestionDetail.answer != ''" class="font-semibold {{selectedQuestionDetail.isCorrect?'text-green-700':'red-text'}} ">Your Answer ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
+                    <p *ngIf="selectedQuestionDetail.answer != ''" class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">  {{selectedQuestionDetail.answer}}</p>
+                    <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text ">  Not Attempted </p>
                   </div>
           
-                  <div class="mb-4">
+                  <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
                     <p class="font-semibold text-green-700">Correct Answer</p>
                     <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}</p>
                   </div>
           
-                  <div class="mt-6">
+                  <div class="mt-6" >
                     <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
-                    <p class="text-sm text-gray-700 leading-relaxed">
-                      This is based on the Biot–Savart Law and Ampere's Law for a circular current-carrying loop.<br/><br/>
-                      &bull; When a wire of length L is bent into a circular loop of radius R, the total magnetic field B at the center (or axis) of the loop is:
-                      <br/>
-                      <code>B ∝ &mu;₀IR² / (R² + x²)<sup>3/2</sup></code> (for a point on the axis)<br/><br/>
-                      However, when L is converted into a loop, R depends on L (since L = 2πR):<br/>
-                      <code>R = L / 2π</code><br/><br/>
-                      Plugging into the Biot–Savart expression and simplifying gives us:<br/>
-                      <code>B ∝ L / R</code>
-                    </p>
+                    <div class="text-sm text-gray-700 leading-relaxed">
+                      <div [innerHTML]="sanitizedHtml"> </div>
+                    </div>
                   </div>
                 </div>
         </div>
     <div ng-if="showSummary" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-8 border-b pb-2">IIT JEE 2026 Preparation Mockup Test</h2>
+      <h2 class="text-2xl font-semibold mb-8 border-b pb-2">{{details.challengeName}}</h2>
   
+
+      <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
+        <!-- Result Summary -->
+        <div class="flex-1">
+          <h3 class="font-semibold text-gray-800 mb-4">Result Summary</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li class="flex justify-between">
+              <span>Max. Marks</span><span class="font-semibold">{{ questions.length * details.totalMarksOfEachAnswer}}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Mark Obtained</span><span class="font-semibold">{{details.totalMarksOfEachAnswer * totalCorrect }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Incorrect Answers</span><span class="font-semibold">{{totalInCorrect }}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Unattempted Questions</span><span class="font-semibold">{{totalNotAttempt}}</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Accuracy</span><span class="font-semibold">{{(totalCorrect/questions.length)*100}}%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+
       <!-- Math Section -->
-      <section class="mb-12">
+      <!-- <section class="mb-12">
         <h3 class="text-xl font-bold mb-4 text-gray-800">Mathematics</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-gray-700 text-lg">
           <div class="flex justify-between">
@@ -93,9 +114,9 @@
           </div>
         </div>
       </section>
-  
+   -->
       <!-- Physics Section -->
-      <section class="pt-8 border-t">
+      <!-- <section class="pt-8 border-t">
         <h3 class="text-xl font-bold mb-4 text-gray-800">Physics</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-gray-700 text-lg">
           <div class="flex justify-between">
@@ -115,7 +136,7 @@
             <p class="text-gray-800">Work hard on <strong>Electromagnetism</strong> and <strong>Optics</strong>.</p>
           </div>
         </div>
-      </section>
+      </section> -->
     </div>
     </main>
   
