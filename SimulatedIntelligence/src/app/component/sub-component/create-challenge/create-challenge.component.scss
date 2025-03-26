@@ -26,10 +26,28 @@
 }
 
 .close-btn {
-  border: none;
-  background: none;
-  font-size: 18px;
-  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  &:before {
+    content: "";
+    width: 2px;
+    height: 15px;
+    background-color: #000;
+    transform: rotate(45deg);
+    position: absolute;
+  }
+  &:after {
+    content: "";
+    width: 2px;
+    height: 15px;
+    background-color: #000;
+    transform: rotate(-45deg);
+    position: absolute;
+  }
 }
 
 .subject-selection {
@@ -94,4 +112,15 @@
   font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
+}
+
+input[type="text"] {
+  padding: 0.5rem 1rem;
+}
+.loader-container {
+  width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

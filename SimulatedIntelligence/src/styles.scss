@@ -41,9 +41,49 @@ button {
     padding: 0.5rem 1rem;
     cursor: pointer !important;
     border-radius: 8px !important;
+    font-weight: 600 !important;
 }
 
 .sidebar li:hover {
     background: #00000012 !important;
     color: #333333 !important;
+}
+
+.subject-selection, .topic-selection {
+    font-weight: 400;
+    label {
+        cursor: pointer;
+    }
+}
+.topic-selection select {
+    border: 2px solid #aaaaaa !important;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 5px solid #dcdcdc;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+    } 
+
+th,td {
+    font-weight: 500;
+}
+.ngx-pagination {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
 }
