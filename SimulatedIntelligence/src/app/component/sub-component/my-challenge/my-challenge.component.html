@@ -42,3 +42,72 @@
     (pageChange)="currentPage = $event"
   ></pagination-controls>
 </div>
+
+<div *ngIf="showAIAnalysis" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-4xl flex items-start gap-8 relative">
+
+    <!-- Badge and Heading -->
+    <div class="absolute -top-6 right-6">
+      <div class="bg-yellow-300 px-4 py-2 rounded-lg text-sm font-bold shadow text-gray-800">
+        +123 XP
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-4 w-full">
+      <div class="flex items-center gap-4">
+        <div class="bg-green-400 text-white font-bold text-2xl px-5 py-4 rounded-xl shadow">
+          A+
+        </div>
+        <h2 class="text-2xl font-bold">Excellent!! Harry</h2>
+      </div>
+
+      <!-- Content -->
+      <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
+        <!-- Result Summary -->
+        <div class="flex-1">
+          <h3 class="font-semibold text-gray-800 mb-4">Result Summary</h3>
+          <ul class="text-gray-700 space-y-2">
+            <li class="flex justify-between">
+              <span>Max. Marks</span><span class="font-semibold">10</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Mark Obtained</span><span class="font-semibold">9</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Incorrect Answers</span><span class="font-semibold">1</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Unattempted Questions</span><span class="font-semibold">1</span>
+            </li>
+            <li class="flex justify-between">
+              <span>Accuracy</span><span class="font-semibold">90%</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="flex-1 border-t md:border-t-0 md:border-l md:pl-8 border-gray-300">
+          <h3 class="font-semibold text-gray-800 mb-4">Recommendations</h3>
+          <ol class="text-gray-700 list-decimal list-inside space-y-2">
+            <li><strong>You should revise</strong> Algebraic Expressions and Thermodynamics.</li>
+            <li><strong>You’re strong in</strong> Coordinate Geometry – keep it up!</li>
+            <li><strong>Based on your pace</strong>, try a 15-minute Medium challenge next.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
+        <button style="font-weight: 500 !important;" class="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded w-full md:w-auto text-black">
+          ← Retake Test
+        </button>
+        <button style="font-weight: 500 !important;" class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
+          Review Answer Sheet
+        </button>
+        <button style="font-weight: 500 !important;" class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
+          Go to Dashboard →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
