@@ -15,9 +15,17 @@ export class ChallengeService {
   submitChallenge(challengeData: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Question/GenerateQuestion`, challengeData);
   }
-  
+
 
   getQuestion(id: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/Question/GetQuestion?model=${id}`);
   }
+  getQuestionsAns(id: string): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/Question/GetQuestionWithAnswer?model=${id}`);
+  }
+
+  saveUserAnswer(userResponse: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Question/SaveUserAnswer`, userResponse);
+  }
 }
+
