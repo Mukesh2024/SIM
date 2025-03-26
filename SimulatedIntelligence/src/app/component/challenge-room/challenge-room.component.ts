@@ -21,10 +21,11 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   difficulty: DifficultyLevel = DifficultyLevel.Easy;
   challengeTime: string = '';
   challengeName: string = '';
+  grade: string = '';
 
 
   // Timer related
-  totalTimeInSeconds: number =0;
+  totalTimeInSeconds: number = 0;
   timeLeft: string = '';
   private timerInterval: any;
 
@@ -55,7 +56,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
         debugger;
         if (response.questionCollections) {
           this.questions = response.questionCollections;
-          const difficultyStr = response.questionDetails.difficultyLevel || 'Easy-Level';
+          const difficultyStr = response.questionDetails.difficultyLevel;
           this.difficulty = this.mapDifficultyLevel(difficultyStr);
 
           const totalTime = response.questionDetails.totalTimeInMin;
@@ -63,9 +64,10 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
           this.totalTimeInSeconds = totalTime ? totalTime * 60 : 30 * 60;
 
           this.challengeName = response.questionDetails.challengeName || "";
-          this.maxMarks = response.questionDetails.numberOfQuestion * response.questionDetails.totalMarksOfEachCorrectAnswer;
+          this.maxMarks = response.questionCollections.length * response.questionDetails.totalMarksOfEachCorrectAnswer;
           this.negativeMarking = response.questionDetails.totalMarksDeductforEachWrongAnswer;
-        
+          this.grade = response.questionDetails.grade || '';
+
 
         } else {
           console.error("Invalid response structure", response);
@@ -120,13 +122,14 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
     return Object.keys(this.answers).length;
   }
 
-  mapDifficultyLevel(level: string): DifficultyLevel {
-    const mapping: { [key: string]: DifficultyLevel } = {
-      'Easy-Level': DifficultyLevel.Easy,
-      'Medium-Level': DifficultyLevel.Medium,
-      'Hard-Level': DifficultyLevel.Hard,
-      'Advanced-Level': DifficultyLevel.Advanced
+  mapDifficultyLevel(level: number): DifficultyLevel {
+    const mapping: { [key: number]: DifficultyLevel } = {
+      0: DifficultyLevel.Easy,
+      1: DifficultyLevel.Medium,
+      2: DifficultyLevel.Hard,
+      3: DifficultyLevel.Advanced
     };
-    return mapping[level] || DifficultyLevel.Easy;
+
+    return mapping[level]
   }
 }
