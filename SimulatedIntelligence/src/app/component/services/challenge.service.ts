@@ -20,4 +20,7 @@ export class ChallengeService {
   getQuestion(id: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/Question/GetQuestion?model=${id}`);
   }
+  getQuestionsAns(id: string): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/Question/GetQuestionWithAnswer?model=${id}`);
+  }
 }
