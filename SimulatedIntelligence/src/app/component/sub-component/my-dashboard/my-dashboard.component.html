@@ -1,4 +1,4 @@
-<div class="container">
+<div class="w-full wrapper">
   <div class="heading04">
     <h2>Recent Challenges</h2>
     <button class="create-challenge-btn" (click)="openCreateChallenge()">Create Challenge</button>
@@ -8,8 +8,7 @@
   </div>
   <div class="challenges-container">
     <div class="challenge-card" *ngFor="let challenge of recentChallenges">
-      <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
-
+      
       <div class="challenge-details">
         <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
           {{ challenge.grade }}
@@ -25,8 +24,41 @@
       </div>
     </div>
   </div>
-  <h2>Topics I have Expertise</h2>
-  <table class="expertise-table">
+  <br/>
+  <div class="heading04">
+    <h2>My Acheivements</h2>
+  </div>
+  <div class="achievement-container">
+    <div class="achievement-card">
+      <div class="flex justify-center align-middle">
+        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/14352/14352310.mp4" type="video/mp4">
+      </video>
+      </div>
+      <h3>Star Performer</h3>
+      <span>A+ in a challenge every week</span>
+    </div>
+    <div class="achievement-card">
+      <div class="flex justify-center align-middle">
+        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/15579/15579041.mp4" type="video/mp4">
+      </video>
+      </div>
+      <h3>Growth Master</h3>
+      <span>Improved Grades in Maths</span>
+    </div>
+    <div class="achievement-card">
+      <div class="flex justify-center align-middle">
+        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+          <source src="https://cdn-icons-mp4.flaticon.com/512/14251/14251560.mp4" type="video/mp4">
+      </video>
+      </div>
+      <h3>AI Favourite</h3>
+      <span>10 Hard Challenges Achiever</span>
+    </div>
+  </div>
+  
+  <!-- <table class="expertise-table">
     <tr *ngFor="let topic of expertiseTopics">
       <td>{{ topic.title }}</td>
       <td>
@@ -35,5 +67,5 @@
       <td>{{ topic.totalQuestions }} Questions Practised</td>
       <td>{{ topic.accuracy }}% Accuracy</td>
     </tr>
-  </table>
+  </table> -->
 </div>

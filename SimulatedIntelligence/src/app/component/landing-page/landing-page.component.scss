@@ -42,17 +42,17 @@
 .sidebar li {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 8px 10px;
   cursor: pointer;
   margin-bottom: 5px;
-  background: #e0e0e0;
   border-radius: 5px;
   transition: 0.3s;
 }
 
 .sidebar li.active {
-  background: #007bff;
+  background: #24BCEC;
   color: white;
+  font-weight: 500;
 }
 
 .sidebar li:hover {
@@ -66,5 +66,13 @@
 
 .content {
   flex: 1;
-  padding: 20px;
+}
+
+
+.user-stats {
+  font-size: 14px;
+}
+.username {
+  font-size: 1rem;
+  font-weight: 500;
 }

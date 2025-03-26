@@ -5,7 +5,7 @@
 }
 
 h2 {
-    margin-top: 20px;
+
     color: #333;
 }
 
@@ -32,26 +32,34 @@ h2 {
 // }
 
 .grade {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
+  font-size: 28px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-bottom: 10px;
+  color: white;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  font-size: 2rem;
+  font-weight: 400;
+  align-items: center;
+  justify-content: center;
 }
 
 .grade-high {
-    background: #4caf50;
+    background: #65d468;
     color: white;
 }
 
 .grade-medium {
-    background: #ff9800;
+    background: #d99631;
     color: white;
 }
 
 .grade-low {
-    background: #f44336;
+    background: #d4483e;
     color: white;
 }
 
@@ -122,20 +130,26 @@ h2 {
 
 
 .heading04 {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px!important;
-
-    button {
-        margin: 0px !important;
-    }
-
+  display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      padding-top: 0.5rem;
+      align-items: center;
 }
 .challenges-container {
     display: flex;
     gap: 20px;
     overflow-x: auto;
     padding: 10px 0;
+
+    background: white;
+    padding: 2rem;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
   }
    
   .challenge-card {
@@ -146,6 +160,7 @@ h2 {
     width: 250px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     flex-shrink: 0;
+    border: 1px solid #ededed;
   }
    
   .challenge-image {
@@ -157,16 +172,13 @@ h2 {
    
   .challenge-details {
     margin-top: 10px;
-  }
-   
-  .grade {
-    font-size: 16px;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: inline-block;
-    margin-bottom: 10px;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      font-weight: 500;
+    }
   }
    
   .grade-high {
@@ -196,6 +208,9 @@ h2 {
     cursor: pointer;
     width: 100%;
     border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+
   }
    
   .btn-primary:hover {
@@ -224,14 +239,15 @@ h2 {
   
   .create-challenge-btn {
     background: #ffb703;
-    color: white;
+    color: #333;
     border: none;
     padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
     cursor: pointer;
     transition: 0.3s;
+    min-width: 12rem;
   }
   
   .create-challenge-btn:hover {
@@ -248,3 +264,26 @@ h2 {
     /* Empty section for future content */
   }
   
+  .achievement-container {
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    .achievement-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      width: 18rem;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+      border: 1px solid #ededed;
+
+      h3 {
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      span {
+        color: #454545;
+      }
+    }
+  }
