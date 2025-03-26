@@ -7,17 +7,18 @@
 
   </div>
   <div class="challenges-container">
-    <div class="challenge-card" *ngFor="let challenge of recentChallenges">
-      
+    <div class="challenge-card" *ngFor="let challenge of myChallenges">
+      <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
+
       <div class="challenge-details">
         <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
           {{ challenge.grade }}
         </span>
 
-        <h3>{{ challenge.title }}</h3>
+        <h3>{{ challenge.name }}</h3>
 
         <p class="challenge-date">
-          {{ challenge.date }}
+          {{ challenge.compltedOn | relativeTime }}
         </p>
 
         <button class="btn-primary">View Result & AI Analysis</button>
@@ -31,7 +32,7 @@
   <div class="achievement-container">
     <div class="achievement-card">
       <div class="flex justify-center align-middle">
-        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+        <video width="120" height="120" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
           <source src="https://cdn-icons-mp4.flaticon.com/512/14352/14352310.mp4" type="video/mp4">
       </video>
       </div>
@@ -40,7 +41,7 @@
     </div>
     <div class="achievement-card">
       <div class="flex justify-center align-middle">
-        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+        <video width="120" height="120" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
           <source src="https://cdn-icons-mp4.flaticon.com/512/15579/15579041.mp4" type="video/mp4">
       </video>
       </div>
@@ -49,7 +50,7 @@
     </div>
     <div class="achievement-card">
       <div class="flex justify-center align-middle">
-        <video width="120" height="120" preload="none" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
+        <video width="120" height="120" style="background: transparent  url('https://cdn-icons-png.flaticon.com/512/14352/14352310.png') 50% 50% / fit no-repeat;" autoplay="autoplay" loop="true" muted="muted" playsinline="">
           <source src="https://cdn-icons-mp4.flaticon.com/512/14251/14251560.mp4" type="video/mp4">
       </video>
       </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboard-services/dashboard.service';
+import { QuestionService } from '../../services/question.service';
 
 @Component({
   selector: 'app-my-dashboard',
@@ -7,11 +8,19 @@ import { DashboardService } from '../../dashboard-services/dashboard.service';
   styleUrls: ['./my-dashboard.component.scss']
 })
 export class MyDashboardComponent implements OnInit {
-  constructor(private dashboardService: DashboardService){}
+  myChallenges: any[] = [];
+  subjectAndTopics: { subject: string; topics: string[]; };
+  constructor(private dashboardService: DashboardService,
+    private questionService: QuestionService
+  ){
+    this.subjectAndTopics = { subject: '', topics: [] };
+  }
   ngOnInit(): void {
   
-    this.dashboardService.getRecentChallenges().subscribe((data =>{ this.recentChallenges = data.recentChallenges}));
-    this.dashboardService.getExpertiseTopics().subscribe((data =>{ this.expertiseTopics = data.expertiseTopics}));
+    this.questionService.getMyChallenges().subscribe((data) => {
+   
+      this.myChallenges = data.slice(0, 3);
+    });
   }
   recentChallenges: Challenge[] = [];
   
@@ -23,6 +32,24 @@ export class MyDashboardComponent implements OnInit {
 
 
   expertiseTopics: topic[] = [];
+  calculateTotalQuestions(): number {
+    const totalCorrect = this.myChallenges[0].totalCorrect;
+    const totalInCorrect = this.myChallenges[0].totalInCorrect;
+    const totalNotAttempt = this.myChallenges[0].totalNotAttempt;
+    return totalCorrect + totalInCorrect + totalNotAttempt;
+  }
+
+  calculateAccuracy(): number {
+    const totalCorrect = this.myChallenges[0].totalCorrect;
+    const totalInCorrect = this.myChallenges[0].totalInCorrect;
+    const totalQuestions = totalCorrect + totalInCorrect;
+    
+    if (totalQuestions === 0) {
+      return 0;
+    }
+
+    return (totalCorrect / totalQuestions) * 100;
+  }
  
   getGradeClass(grade: string) {
     return {
@@ -34,10 +61,10 @@ export class MyDashboardComponent implements OnInit {
  
   getSubjectClass(subject: string) {
     return {
-      'maths': subject === 'Maths',
-      'physics': subject === 'Physics',
-      'chemistry': subject === 'Chemistry',
-      'bio': subject === 'Bio'
+      'Math': subject === 'Math',
+      'Physics': subject === 'Physics',
+      'Chemistry': subject === 'Chemistry',
+      'Biology': subject === 'Biology'
     };
   }
 
