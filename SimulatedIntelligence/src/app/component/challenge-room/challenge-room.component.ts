@@ -6,7 +6,7 @@ import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 @Component({
   selector: 'app-challenge-room-page',
   templateUrl: './challenge-room.component.html',
-  styleUrls: ['./landing-page.component.scss']
+  styleUrls: ['./challenge-room.component.scss']
 })
 export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   showModal = false;

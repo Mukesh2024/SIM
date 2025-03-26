@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class RecommendationService {
 
-  private baseUrl = 'http://localhost:5109/api/Question'; // Replace with your actual API URL
+  private baseUrl = 'http://localhost:5109/api'; 
 
   constructor(private http: HttpClient) { }
 
-  getRecommadation(model: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/Question/RecommendationOnQuestion`, model);
+  getRecommadation(questionData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Question/RecommendationOnQuestion`, questionData);
   }
 }

@@ -10,45 +10,82 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChallengeReviewComponent implements OnInit {
   recommendation: string = '';
+  challengeId: any = '';
   questions: any[] = [];
-  model: any = {
-    Guid: 'some-guid',
-    grade: 'A',
-    questionsCollection: [
-      {}]
-  };
+  index: number = 0;
+  selectedQuestionDetail: any = null;
+  grade: any;
+
   constructor(private recommendationService: RecommendationService, private challengeService: ChallengeService, private route: ActivatedRoute) { }
   ngOnInit(): void {
-    const challengeId = this.route.snapshot.paramMap.get('id');
-    if (challengeId) {
-      this.getQuestions(challengeId);
+    this.challengeId = this.route.snapshot.paramMap.get('id');
+    if (this.challengeId) {
+      this.getQuestions(this.challengeId);
+   
     } else {
       console.error("No challenge ID found in route!");}
-    this.getRecommendation();
+  
   }
   showSummary = true;
-  getQuestions(challengeId: string) {
-    debugger;
-    this.challengeService.getQuestion(challengeId).subscribe({
-      next: (response) => {
-        console.log("Response from challenge service:", response.questionDetails); // Print the data to the console
-     
-        if (Array.isArray(response.questionDetails)) { 
-          this.questions = response.questionDetails;
+  // getGrade(challengeId: string) {
 
-        } else {
-          console.error("Invalid response structure", response);
-        }
-      },
-      error: (err) => {
-        console.error("Error fetching challenge questions:", err);
-      }
-    });
-  }
+  //   this.challengeService.getQuestion(challengeId).subscribe({
+  //     next: (response: any) => {
+  //       console.log("Response from challenge service:", response.questionCollections); 
+  //    this.grade= response.questionDetails.grade;
+  //       if (response.questionCollections) { 
+  //         this.questions = response.questionCollections;
+  //        // this.getRecommendation(response.questionCollections[0]);
+  //       } else {
+  //         console.error("Invalid response structure", response);
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.error("Error fetching challenge questions:", err);
+  //     }
+  //   });
+  // }
+  getQuestions(challengeId: string) {
   
+        this.challengeService.getQuestionsAns(challengeId).subscribe({
+          next: (response: any) => {
+            console.log("Response from challenge service:", response.questionCollections); 
+       
+            if (response) { 
+              this.questions = response;
+             // this.getRecommendation(response.questionCollections[0]);
+            } else {
+              console.error("Invalid response structure", response);
+            }
+          },
+          error: (err) => {
+            console.error("Error fetching challenge questions:", err);
+          }
+        });
+      }
+  
+  onSelectQuestion(index: number): void {
+    if (this.questions && this.questions.length > 0 && this.questions[index]) {
+      this.selectedQuestionDetail = this.questions[index];
+      this.index= index;
+      this.getRecommendation(this.selectedQuestionDetail);
+      console.log("Selected Question:", this.selectedQuestionDetail);
+      // this.updateMainContent(this.selectedQuestionDetail, index);
+    }
+  }
+  updateMainContent(question: any, questionNumber: number): void {
+  
+  }
  
-  getRecommendation() {
-    this.recommendationService.getRecommadation(this.model).subscribe(
+  getRecommendation(questionDetail: any) {
+
+    const questionData = {
+      guid:this.challengeId,
+      grade: this.grade,
+      questionDetail: questionDetail
+    };
+
+    this.recommendationService.getRecommadation(questionData).subscribe(
       (response) => {
         console.log('Recommendation fetched:', response
         );
