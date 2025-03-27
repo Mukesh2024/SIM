@@ -35,7 +35,7 @@
         <td>{{ challenge.compltedOn | relativeTime }}</td>
         <td>{{ challenge.grade }}</td>
         <td>
-          <button class="btn-primary" (click)="openAiAnalysis()">
+          <button class="btn-primary" (click)="navigateToChallengeReview(challengeId)">
             View AI Analysis
           </button>
         </td>
@@ -105,7 +105,7 @@
         <button style="font-weight: 500 !important;" class="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded w-full md:w-auto text-black">
           ← Retake Test
         </button>
-        <button (click)="navigateToChallengeReview(challengeId)" style="font-weight: 500 !important;" class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
+        <button  style="font-weight: 500 !important;" class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
           Review Answer Sheet
         </button>
         <button (click)="closeAiAnalysis()" style="font-weight: 500 !important;" class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../dashboard-services/dashboard.service';
 import { QuestionService } from '../../services/question.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-dashboard',
@@ -10,8 +11,10 @@ import { QuestionService } from '../../services/question.service';
 export class MyDashboardComponent implements OnInit {
   myChallenges: any[] = [];
   loadChallenges: boolean = true;
+  challengeId: string = ''; 
   subjectAndTopics: { subject: string; topics: string[]; };
-  constructor(private dashboardService: DashboardService,
+  constructor(private router: Router,
+    private dashboardService: DashboardService,
     private questionService: QuestionService
   ){
     this.subjectAndTopics = { subject: '', topics: [] };
@@ -20,8 +23,9 @@ export class MyDashboardComponent implements OnInit {
   
     this.questionService.getMyChallenges().subscribe((data) => {
    
-      this.myChallenges = data.slice(0, 4);
+      this.myChallenges = data.slice( -4);
       this.loadChallenges = false;
+      this.challengeId = this.myChallenges[0].guid;
     });
   }
   recentChallenges: Challenge[] = [];
@@ -40,7 +44,10 @@ export class MyDashboardComponent implements OnInit {
     const totalNotAttempt = this.myChallenges[0].totalNotAttempt;
     return totalCorrect + totalInCorrect + totalNotAttempt;
   }
-
+  navigateToChallengeReview(challengeId: string) {
+    // Navigate to the review-challenge route with the challengeId parameter
+    this.router.navigate(['/review-challenge', challengeId]);
+  }
   calculateAccuracy(): number {
     const totalCorrect = this.myChallenges[0].totalCorrect;
     const totalInCorrect = this.myChallenges[0].totalInCorrect;

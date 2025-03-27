@@ -27,7 +27,7 @@
             {{ challenge.compltedOn | relativeTime }}
           </p>
   
-          <button class="btn-primary">View Result & AI Analysis</button>
+          <button class="btn-primary" (click)="navigateToChallengeReview(challengeId)">View Result & AI Analysis</button>
         </div>
       </div>
     </div>
