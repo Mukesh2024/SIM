@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecommendationService {
 
-  private baseUrl = 'http://localhost:5109/api'; 
+  private baseUrl = environment.baseURL
 
   constructor(private http: HttpClient) { }
 
   getRecommadation(questionData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Question/RecommendationOnQuestion`, questionData);
+    return this.http.post(`${this.baseUrl}/Question/RecommendationOnQuestion`, questionData, { responseType: 'text' });
   }
 }

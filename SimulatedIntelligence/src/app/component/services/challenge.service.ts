@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChallengeService {
 
-  private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api'; // Replace with your actual API URL
-  //private baseUrl = 'http://localhost:5109/api'; // Replace with your actual API URL
+  // private baseUrl = 'https://2fvfxspq-5109.inc1.devtunnels.ms/api'; // Replace with your actual API URL
+  private baseUrl = environment.baseURL
 
   constructor(private http: HttpClient) { }
 

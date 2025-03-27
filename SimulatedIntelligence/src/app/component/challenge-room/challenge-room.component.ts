@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChallengeService } from '../services/challenge.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
 
 @Component({
@@ -21,6 +21,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   difficulty: DifficultyLevel = DifficultyLevel.Easy;
   challengeTime: string = '';
   challengeName: string = '';
+  challengeId: string = ''; 
   grade: string = '';
   totalMarksOfEachCorrectAnswer: number = 0;
 
@@ -54,9 +55,14 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
     }
     this.startTimer();
   }
+  navigateToChallengeReview(challengeGuidId: string) {
+    const challengeId = this.route.snapshot.paramMap.get('id');
+    // Navigate to the review-challenge route with the challengeId parameter
+    this.router.navigate(['/review-challenge', challengeId]);
+   
+  }
 
-
-  constructor(private challengeService: ChallengeService, private route: ActivatedRoute) {
+  constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router) {
 
   }
 

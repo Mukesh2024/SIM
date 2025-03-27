@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AiAnalysisComponent } from '../view-ai-analysis/view-ai-analysis.component';
 import { DashboardService } from '../../dashboard-services/dashboard.service';
 import { QuestionService } from '../../services/question.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-challenge',
@@ -16,20 +17,30 @@ export class MyChallengeComponent implements OnInit {
   showAIAnalysis:boolean = false;
   loadChallenges: boolean = true;
 
+  challengeId: string = ''; 
   constructor(private dialog: MatDialog,
-    private dashboardService: DashboardService,
-    private questionService: QuestionService
+    private router: Router,
+    private questionService: QuestionService,
   ) {
     this.subjectAndTopics = { subject: '', topics: [] };
   }
   ngOnInit(): void {
  
-    this.questionService.getMyChallenges().subscribe((data => {
+    this.questionService.getMyChallenges().subscribe((data => { 
       this.loadChallenges = false;
-      return this.myChallenges = data
+      this.myChallenges = data;
+      if (this.myChallenges.length > 0) {
+  // Assign challengeId in ngOnInit or appropriate method
+  this.challengeId = this.myChallenges[0].guid;
+      }
     }));
+   
   }
-  
+ 
+  navigateToChallengeReview(challengeId: string) {
+    // Navigate to the review-challenge route with the challengeId parameter
+    this.router.navigate(['/review-challenge', challengeId]);
+  }
 
   currentPage=1;
   getSubjectClass(subject: string) {
@@ -42,21 +53,9 @@ export class MyChallengeComponent implements OnInit {
   }
    openAiAnalysis() {
     this.showAIAnalysis = true;
-    // this.dialog.open(AiAnalysisComponent, {
-    //       width: '500px',
-    //       data: {
-    //         userName: 'Harry',
-    //         maxMarks: 10,
-    //         marksObtained: 9,
-    //         incorrectAnswers: 1,
-    //         unattempted: 1,
-    //         accuracy: 90,
-    //         recommendations: [
-    //           'You should revise Algebraic Expressions and Thermodynamics.',
-    //           "You're strong in Coordinate Geometry – keep it up!",
-    //           'Based on your pace, try a 15-minute Medium challenge next.'
-    //         ]
-    //       }
-    //     });
+  
+      }
+      closeAiAnalysis() {
+        this.showAIAnalysis = false;
       }
 }
