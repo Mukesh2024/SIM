@@ -140,7 +140,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   openResultModal() {
     const formattedAnswers = this.questions.map((questionData, index) => {
       return {
-        question: questionData.questionText,
+        questionText: questionData.questionText,
         answer: this.answers.hasOwnProperty(index) ? this.answers[index] : "",
         isCorrect: false,
         hint: "",
