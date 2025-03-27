@@ -1,20 +1,23 @@
-<div class="bg-gray-100 text-gray-900 font-sans">
+<div class=" w-full flex p-8 wrapper">
 
-  <div class="flex min-h-screen">
+  <div class="flex min-h-screen gap-8 flex-1">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow p-4">
-      <div class="mb-6 text-center">
-        <img src="https://i.pravatar.cc/100" alt="User" class="rounded-full w-16 h-16 mx-auto" />
-        <div class="font-semibold mt-2">Harry Potter</div>
-        <!-- <div class="text-sm text-green-600">+340 XP</div> -->
-        <div><strong>Grade:</strong> {{ grade }}</div>
+    <aside class="sidebar challenge-sidebar">
+      <div class="user-profile">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsFikiVeZsqKvKabvMctua-v8sEenvS1P2jw&s" alt="User Avatar" class="user-avatar" />
+        <div class="user-info">
+          <h3 class="username">Harry Potter</h3>
+          <span class="user-stats text-gray-600">
+            +100 XP
+          </span>
+        </div>
       </div>
 
       <div class="mb-4">
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-4">
           <button *ngFor="let q of questions; let i = index" 
-                  class="py-1 rounded"
+                  class="py-1 rounded box-button"
                   [ngClass]="{
                     'bg-blue-400 text-white': i === currentQuestionIndex,
                     'bg-green-400 text-white': i !== currentQuestionIndex && answers[i],
@@ -25,24 +28,26 @@
           </button>
         </div>
       </div>      
-
-      <button (click)="openModal()" class="w-full bg-yellow-400 py-2 rounded font-bold">Submit Challenge</button>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 p-6">
-      <div class="bg-white p-6 rounded shadow">
-        <h2 class="text-lg font-semibold mb-1">{{challengeName}}</h2>
-        <h3 class="text-gray-500 text-xl font-medium mb-4">Q.{{ currentQuestionIndex + 1 }}</h3>
-        <p class="mb-6">
+    <main class="mainer">
+      <div>
+        <h2 class="text-lg font-semibold mb-4">{{challengeName}}</h2>
+        <h3 class="text-gray-500 text-xl font-medium">Q.{{ currentQuestionIndex + 1 }}</h3>
+        <p class="mb-1 text-lg">
           {{ questions[currentQuestionIndex]?.questionText }}
         </p>
+        <p *ngIf="questions[currentQuestionIndex]?.hint" class="text-gray-500 mb-6">
+          Hint:  {{questions[currentQuestionIndex]?.hint}}
+        </p>
+        <br *ngIf="!questions[currentQuestionIndex]?.hint"/>
 
         <!-- Options -->
         <div class="flex flex-col gap-4">
           <label *ngFor="let option of getOptionKeys(currentQuestionIndex); let key = index" 
                  class="border border-blue-400 rounded px-4 py-2 cursor-pointer hover:bg-blue-50"
-                 [ngClass]="{ 'bg-blue-200 border-blue-600': answers[currentQuestionIndex] === option }">
+                 [ngClass]="{ 'bg-blue-200 border-blue-600': answers[currentQuestionIndex] === option.toUpperCase() }">
             <input type="radio" name="answer" class="hidden"
                    [value]="option"
                    (change)="selectAnswer(currentQuestionIndex, option)" />
@@ -54,13 +59,14 @@
     </main>
 
     <!-- Right Panel -->
-    <aside class="w-64 p-6 bg-white shadow">
+    <aside class="sidebar challenge-sidebar">
       <div class="text-center mb-6">
         <div class="text-gray-700 text-sm">Total Time Left</div>
         <div class="text-3xl font-bold text-red-600">{{ timeLeft }}</div>
       </div>
-
-      <div class="text-sm space-y-3">
+      <button (click)="openModal()" class="w-full bg-yellow-400 py-2 rounded font-bold">Submit Challenge</button>
+      <hr class="mt-6" />
+      <div class="text-base space-y-3 my-6">
         <div><strong>Maximum Marks:</strong> {{ maxMarks }}</div>
         <div><strong>Negative Marking:</strong> {{ negativeMarking }}</div>
         <div><strong>Difficulty:</strong> {{ difficulty }}</div>

@@ -67,7 +67,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   fetchChallengeData(challengeId: string) {
     this.challengeService.getQuestion(challengeId).subscribe({
       next: (response: any) => {
-        debugger;
+        //debugger;
         if (response.questionCollections) {
           this.questions = response.questionCollections;
           const difficultyStr = response.questionDetails.difficultyLevel;
@@ -123,7 +123,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
 
 
   openResultModal() {
-    debugger;
+    //debugger;
     console.log('Selected answers:', this.answers);
 
     const formattedAnswers = this.questions.map((questionData, index) => {

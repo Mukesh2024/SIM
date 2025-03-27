@@ -14,6 +14,7 @@ export class MyChallengeComponent implements OnInit {
   myChallenges: any[] = [];
   subjectAndTopics: { subject: string; topics: string[]; };
   showAIAnalysis:boolean = false;
+  loadChallenges: boolean = true;
 
   constructor(private dialog: MatDialog,
     private dashboardService: DashboardService,
@@ -23,7 +24,10 @@ export class MyChallengeComponent implements OnInit {
   }
   ngOnInit(): void {
  
-    this.questionService.getMyChallenges().subscribe((data => { this.myChallenges = data }));
+    this.questionService.getMyChallenges().subscribe((data => {
+      this.loadChallenges = false;
+      return this.myChallenges = data
+    }));
   }
   
 

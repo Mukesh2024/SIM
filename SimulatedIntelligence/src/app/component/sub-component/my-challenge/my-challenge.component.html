@@ -1,5 +1,9 @@
 <div class="table-container">
-  <table class="custom-table">
+  <div class="loadContainer" *ngIf="loadChallenges">
+    <span class="loader"></span>
+  </div>
+
+  <table *ngIf="!loadChallenges" class="custom-table">
     <thead>
       <tr>
         <th>Title</th>
