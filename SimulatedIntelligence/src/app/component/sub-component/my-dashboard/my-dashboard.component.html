@@ -9,21 +9,26 @@
 
   </div>
   <div class="challenges-container">
-    <div class="challenge-card" *ngFor="let challenge of myChallenges">
-      <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
-
-      <div class="challenge-details">
-        <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
-          {{ challenge.grade }}
-        </span>
-
-        <h3>{{ challenge.name }}</h3>
-
-        <p class="challenge-date">
-          {{ challenge.compltedOn | relativeTime }}
-        </p>
-
-        <button class="btn-primary">View Result & AI Analysis</button>
+    <div class="loadContainer" *ngIf="loadChallenges">
+      <span class="loader"></span>
+    </div>
+    <div *ngIf="!loadChallenges" class="flex gap-8" >
+      <div class="challenge-card" *ngFor="let challenge of myChallenges">
+        <!-- <img [src]="challenge.image" alt="{{ challenge.title }} Image" class="challenge-image" /> -->
+  
+        <div class="challenge-details">
+          <span class="grade" [ngClass]="getGradeClass(challenge.grade)">
+            {{ challenge.grade }}
+          </span>
+  
+          <h3>{{ challenge.name }}</h3>
+  
+          <p class="challenge-date">
+            {{ challenge.compltedOn | relativeTime }}
+          </p>
+  
+          <button class="btn-primary">View Result & AI Analysis</button>
+        </div>
       </div>
     </div>
   </div>

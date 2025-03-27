@@ -15,6 +15,8 @@ export class MyChallengeComponent implements OnInit {
   myChallenges: any[] = [];
   subjectAndTopics: { subject: string; topics: string[]; };
   showAIAnalysis:boolean = false;
+  loadChallenges: boolean = true;
+
   challengeId: string = ''; 
   constructor(private dialog: MatDialog,
     private router: Router,
@@ -25,6 +27,7 @@ export class MyChallengeComponent implements OnInit {
   ngOnInit(): void {
  
     this.questionService.getMyChallenges().subscribe((data => { 
+      this.loadChallenges = false;
       this.myChallenges = data;
       if (this.myChallenges.length > 0) {
   // Assign challengeId in ngOnInit or appropriate method

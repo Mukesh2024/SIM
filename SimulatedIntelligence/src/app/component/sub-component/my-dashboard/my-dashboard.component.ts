@@ -9,6 +9,7 @@ import { QuestionService } from '../../services/question.service';
 })
 export class MyDashboardComponent implements OnInit {
   myChallenges: any[] = [];
+  loadChallenges: boolean = true;
   subjectAndTopics: { subject: string; topics: string[]; };
   constructor(private dashboardService: DashboardService,
     private questionService: QuestionService
@@ -19,7 +20,8 @@ export class MyDashboardComponent implements OnInit {
   
     this.questionService.getMyChallenges().subscribe((data) => {
    
-      this.myChallenges = data.slice(0, 3);
+      this.myChallenges = data.slice(0, 4);
+      this.loadChallenges = false;
     });
   }
   recentChallenges: Challenge[] = [];
@@ -52,10 +54,13 @@ export class MyDashboardComponent implements OnInit {
   }
  
   getGradeClass(grade: string) {
+    console.log("grade", grade)
     return {
       'grade-high': grade === 'A+' || grade === 'A',
-      'grade-medium': grade === 'B' || grade === 'C',
-      'grade-low': grade === 'D' || grade === 'F'
+      'grade-medium': grade === 'B' || grade === 'B+',
+      'grade-ok': grade === 'C' || grade === 'C+',
+      'grade-low': grade === 'D',
+      'grade-poor': grade === 'F'
     };
   }
  

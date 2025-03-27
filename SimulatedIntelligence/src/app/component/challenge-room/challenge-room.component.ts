@@ -77,7 +77,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   fetchChallengeData(challengeId: string) {
     this.challengeService.getQuestion(challengeId).subscribe({
       next: (response: any) => {
-        debugger;
+        //debugger;
         if (response.questionCollections) {
           this.fetchChallengeDataResponse = response;
           this.questions = response.questionCollections;
