@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ChallengeService } from '../services/challenge.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DifficultyLevel } from 'src/app/enums/difficulty-level.enum';
@@ -21,25 +21,29 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   difficulty: DifficultyLevel = DifficultyLevel.Easy;
   challengeTime: string = '';
   challengeName: string = '';
-  challengeId: string = ''; 
+  challengeId: string = '';
   grade: string = '';
   totalMarksOfEachCorrectAnswer: number = 0;
 
   studentResultData = {
-    obtainedGrade: "", // Default empty string
-    GradeMessage: "", // Default empty string
-    MaxMark: 0, // Default 0
-    MarkObtained: 0, // Default 0
-    IncorrectAnswer: 0, // Default 0
-    UnattemptedQuestions: 0, // Default 0
-    PercentageScored: 0,// Default 0,
+    obtainedGrade: "",
+    GradeMessage: "",
+    MaxMark: 0,
+    MarkObtained: 0,
+    IncorrectAnswer: 0,
+    UnattemptedQuestions: 0,
+    PercentageScored: 0,
     Recommendations: " "
   };
 
+  fetchChallengeDataResponse: any = {};
+  studentResultDataResponse: any = {};
 
 
 
-  // Timer related
+
+
+
   totalTimeInSeconds: number = 0;
   timeLeft: string = '';
   private timerInterval: any;
@@ -57,12 +61,12 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   }
   navigateToChallengeReview(challengeGuidId: string) {
     const challengeId = this.route.snapshot.paramMap.get('id');
-    // Navigate to the review-challenge route with the challengeId parameter
     this.router.navigate(['/review-challenge', challengeId]);
-   
+
   }
 
-  constructor(private challengeService: ChallengeService, private route: ActivatedRoute, private router: Router) {
+  constructor(private challengeService: ChallengeService, private route: ActivatedRoute,
+    private router: Router, private cdr: ChangeDetectorRef) {
 
   }
 
@@ -75,6 +79,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
       next: (response: any) => {
         debugger;
         if (response.questionCollections) {
+          this.fetchChallengeDataResponse = response;
           this.questions = response.questionCollections;
           const difficultyStr = response.questionDetails.difficultyLevel;
           this.difficulty = this.mapDifficultyLevel(difficultyStr);
@@ -127,17 +132,18 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   openModal() { this.showModal = true; }
   closeModal() { this.showModal = false; }
 
+  redirectToDashboard() {
+    this.router.navigate(['']);
+  }
+
 
   openResultModal() {
-    debugger;
-    console.log('Selected answers:', this.answers);
-
     const formattedAnswers = this.questions.map((questionData, index) => {
       return {
         question: questionData.questionText,
-        answer: this.answers.hasOwnProperty(index) ? this.answers[index] : "", // If answered, take the answer, else empty string
-        isCorrect: false, // Default to false, actual correctness will be determined on the backend
-        hint: "", // Placeholder, backend will fill if needed
+        answer: this.answers.hasOwnProperty(index) ? this.answers[index] : "",
+        isCorrect: false,
+        hint: "",
         options: questionData.options
       };
     });
@@ -147,26 +153,19 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
       grade: this.grade,
       answers: formattedAnswers
     };
-
-    console.log('Payload:', payload);
-
     this.challengeService.saveUserAnswer(payload).subscribe({
       next: (response) => {
-        console.log("Response from API:", response);
-
-        // Mapping response to studentResultData
+        this.studentResultDataResponse = response;
         this.studentResultData = {
-          obtainedGrade: response.grade, // Grade received from response
-          GradeMessage: this.getGradeMessage(response.grade), // Message based on grade
+          obtainedGrade: response.grade,
+          GradeMessage: this.getGradeMessage(response.grade),
           MaxMark: this.maxMarks,
-          MarkObtained: response.totalCorrect * this.totalMarksOfEachCorrectAnswer, // Correct answers count
+          MarkObtained: response.totalCorrect * this.totalMarksOfEachCorrectAnswer,
           IncorrectAnswer: response.totalInCorrect,
-          UnattemptedQuestions: response.totalNotAttempt, // Not attempted questions count
+          UnattemptedQuestions: response.totalNotAttempt,
           Recommendations: response.aiRecommendation.toString().replace('\n', '<br><br>'),
-          PercentageScored:this.calculatePercentageScored()
+          PercentageScored: this.calculatePercentageScored()
         };
-        console.log("Mapped studentResultData:", this.studentResultData);
-
         this.showResult = true;
         this.showModal = false;
         clearInterval(this.timerInterval);
@@ -176,23 +175,28 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
       }
     });
   }
-
   calculatePercentageScored(): number {
-    const totalCorrect = this.studentResultData.MarkObtained / this.totalMarksOfEachCorrectAnswer;
-    const totalIncorrect = this.studentResultData.IncorrectAnswer;
-    const totalNotAttempted = this.studentResultData.UnattemptedQuestions;
-  
-    const totalQuestions = totalCorrect + totalIncorrect + totalNotAttempted;
-    const totalMarks = totalQuestions * this.totalMarksOfEachCorrectAnswer;
-  
-    const negativeMarks = totalIncorrect * this.negativeMarking;
-    const actualMarks = this.studentResultData.MarkObtained - negativeMarks;
-  
-    const percentage = (actualMarks / totalMarks) * 100;
-  
-    return Math.max(0, Math.round(percentage)); // Ensures no negative %, rounded off
+    if (!this.fetchChallengeDataResponse || !this.studentResultDataResponse) {
+      console.error("Missing challenge data or student result data.");
+      return 0;
+    }
+
+    const totalQuestions = this.fetchChallengeDataResponse.questionDetails.numberOfQuestion;
+    const correctAnswers = this.studentResultDataResponse.totalCorrect;
+    const incorrectAnswers = this.studentResultDataResponse.totalInCorrect;
+    const unattemptedQuestions = this.studentResultDataResponse.totalNotAttempt;
+
+    const marksPerCorrectAnswer = this.fetchChallengeDataResponse.questionDetails.totalMarksOfEachCorrectAnswer;
+    const negativeMarking = this.fetchChallengeDataResponse.questionDetails.totalMarksDeductforEachWrongAnswer;
+
+    const totalMarks = totalQuestions * marksPerCorrectAnswer;
+    const marksObtained = (correctAnswers * marksPerCorrectAnswer) - (incorrectAnswers * negativeMarking);
+
+    const percentageScored = (marksObtained / totalMarks) * 100;
+    return Math.max(0, percentageScored);
   }
-   
+
+
   closeResultModal() { this.showResult = false; }
   goToQuestion(index: number) { this.currentQuestionIndex = index; }
   selectAnswer(questionIndex: number, selectedOption: string) {
