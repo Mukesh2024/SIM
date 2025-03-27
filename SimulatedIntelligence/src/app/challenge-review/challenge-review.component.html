@@ -51,13 +51,14 @@
             ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
           <p *ngIf="selectedQuestionDetail.answer != ''"
             class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">
-            {{selectedQuestionDetail.answer}}</p>
+        
+           {{selectedQuestionDetail.answer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.answer.toLowerCase()]}}  </p>
           <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text "> Not Attempted </p>
         </div>
 
         <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
           <p class="font-semibold text-green-700">Correct Answer</p>
-          <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}</p>
+          <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.correctAnswer.toLowerCase()]}} </p>
         </div>
 
         <div class="mt-6">
