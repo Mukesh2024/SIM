@@ -22,8 +22,7 @@
                     'bg-blue-400 text-white': i === currentQuestionIndex,
                     'bg-green-400 text-white': i !== currentQuestionIndex && answers[i],
                     'bg-white border': i !== currentQuestionIndex && !answers[i]
-                  }"
-                  (click)="goToQuestion(i)">
+                  }" (click)="goToQuestion(i)">
             Question {{ i + 1 }}
           </button>
         </div>
@@ -86,116 +85,119 @@
 
   </div>
 
-    <!-- Modal Overlay -->
-    <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-      <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 relative">
-    
-        <!-- Close Button -->
-        <button
-          class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl font-bold"
-          (click)="closeModal()"
-        >
-          &times;
-        </button>
-    
-        <h2 class="text-xl font-semibold mb-4">Review and Submit Challenge</h2>
-    
-        <!-- Modal Content -->
-        <div class="text-gray-700 space-y-2">
-          <p><strong>Total Attempted</strong>: {{ getAttemptedCount() }}</p>
-          <p><strong>Total Unattempted</strong>: {{ questions.length - getAttemptedCount() }}</p>
-          <p><strong>Time Left</strong>: {{ timeLeft }}</p>
-    
-    
-          <p class="mt-4 font-medium text-black">Are you sure you want to submit the Challenge?</p>
-        </div>
-    
-        <!-- Action Buttons -->
-        <div class="flex justify-between mt-6">
-          <button
-            class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium"
-            (click)="closeModal()"
-          >
-            ← Review Questions
-          </button>
-          <button
-            class="px-4 py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-white font-semibold"
-            (click)="openResultModal()"
-          >
-            Submit Challenge
-          </button>
-        </div>
-    
-      </div>
-    </div>
-    
+  <!-- Modal Overlay -->
+  <div *ngIf="showModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg p-6 relative">
+
+      <!-- Close Button -->
+      <button class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-xl font-bold" (click)="closeModal()">
+        &times;
+      </button>
+
+      <h2 class="text-xl font-semibold mb-4">Review and Submit Challenge</h2>
+
+      <!-- Modal Content -->
+      <div class="text-gray-700 space-y-2">
+        <p><strong>Total Attempted</strong>: {{ getAttemptedCount() }}</p>
+        <p><strong>Total Unattempted</strong>: {{ questions.length - getAttemptedCount() }}</p>
+        <p><strong>Time Left</strong>: {{ timeLeft }}</p>
 
 
-
-<!-- Result Modal Overlay  -->
-<div *ngIf="showResult" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-  <!-- Modal Content -->
-  <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-4xl flex items-start gap-8 relative">
-
-    <!-- Badge and Heading -->
-    <div class="absolute -top-6 right-6">
-      <div class="bg-yellow-300 px-4 py-2 rounded-lg text-sm font-bold shadow text-gray-800">
-        +123 XP
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-4 w-full">
-      <div class="flex items-center gap-4">
-        <div class="bg-green-400 text-white font-bold text-2xl px-5 py-4 rounded-xl shadow">
-         {{studentResultData.obtainedGrade}}
-        </div>
-        <h2 class="text-2xl font-bold">{{studentResultData.GradeMessage}}</h2>
-      </div>
-
-      <!-- Content -->
-      <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
-        <!-- Result Summary -->
-        <div class="flex-1">
-          <h3 class="font-semibold text-gray-800 mb-4">Result Summary</h3>
-          <ul class="text-gray-700 space-y-2">
-            <li class="flex justify-between">
-              <span>Max. Marks</span><span class="font-semibold">{{studentResultData.MaxMark}}</span>
-            </li>
-            <li class="flex justify-between">
-              <span>Mark Obtained</span><span class="font-semibold">{{studentResultData.MarkObtained}}</span>
-            </li>
-            <li class="flex justify-between">
-              <span>Incorrect Answers</span><span class="font-semibold">{{studentResultData.IncorrectAnswer}}</span>
-            </li>
-            <li class="flex justify-between">
-              <span>Unattempted Questions</span><span class="font-semibold">{{studentResultData.UnattemptedQuestions}}</span>
-            </li>
-            <li class="flex justify-between">
-              <span>Accuracy</span><span class="font-semibold">{{studentResultData.PercentageScored}}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Recommendations -->
-        <div class="flex-1 border-t md:border-t-0 md:border-l md:pl-8 border-gray-300">
-          <h3 class="font-semibold text-gray-800 mb-4">Recommendations</h3>
-          <div innerHTML="{{studentResultData.Recommendations}}"></div>
-        </div>
+        <p class="mt-4 font-medium text-black">Are you sure you want to submit the Challenge?</p>
       </div>
 
       <!-- Action Buttons -->
-      <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
-        <button style="font-weight: 500 !important;" class="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded w-full md:w-auto text-black">
-          ← Retake Test
+      <div class="flex justify-between mt-6">
+        <button class="px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium"
+          (click)="closeModal()">
+          ← Review Questions
         </button>
-        <button (click)="navigateToChallengeReview(challengeId)" style="font-weight: 500 !important;" class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
-          Review Answer Sheet
-        </button>
-        <button (click)="closeModal()" style="font-weight: 500 !important;" class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
-          Go to Dashboard →
+        <button class="px-4 py-2 rounded bg-yellow-400 hover:bg-yellow-500 text-white font-semibold"
+          (click)="openResultModal()">
+          Submit Challenge
         </button>
       </div>
+
     </div>
   </div>
+
+
+
+
+  <!-- Result Modal Overlay  -->
+  <div *ngIf="showResult" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <!-- Modal Content -->
+    <div class="bg-white rounded-3xl shadow-lg p-8 w-full max-w-4xl flex items-start gap-8 relative">
+
+      <!-- Badge and Heading -->
+      <div class="absolute -top-6 right-6">
+        <div class="bg-yellow-300 px-4 py-2 rounded-lg text-sm font-bold shadow text-gray-800">
+          +123 XP
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 w-full">
+        <div class="flex items-center gap-4">
+          <div class="bg-green-400 text-white font-bold text-2xl px-5 py-4 rounded-xl shadow">
+            {{studentResultData.obtainedGrade}}
+          </div>
+          <h2 class="text-2xl font-bold">{{studentResultData.GradeMessage}}</h2>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
+          <!-- Result Summary -->
+          <div class="flex-1">
+            <h3 class="font-semibold text-gray-800 mb-4">Result Summary</h3>
+            <ul class="text-gray-700 space-y-2">
+              <li class="flex justify-between">
+                <span>Max. Marks</span><span class="font-semibold">{{studentResultData.MaxMark}}</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Mark Obtained</span><span class="font-semibold">{{studentResultData.MarkObtained}}</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Incorrect Answers</span><span class="font-semibold">{{studentResultData.IncorrectAnswer}}</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Unattempted Questions</span><span
+                  class="font-semibold">{{studentResultData.UnattemptedQuestions}}</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Accuracy</span>
+                <span class="font-semibold">
+                  {{ studentResultData.PercentageScored &&
+                  studentResultData.PercentageScored !== 0
+                  ? studentResultData.PercentageScored + '%'
+                  : studentResultData.PercentageScored }}
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Recommendations -->
+          <div class="flex-1 border-t md:border-t-0 md:border-l md:pl-8 border-gray-300">
+            <h3 class="font-semibold text-gray-800 mb-4">Recommendations</h3>
+            <div innerHTML="{{studentResultData.Recommendations}}"></div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-col md:flex-row justify-between gap-4 mt-6">
+          <button style="font-weight: 500 !important;"
+            class="bg-lime-400 hover:bg-lime-500 px-4 py-2 rounded w-full md:w-auto text-black">
+            ← Retake Test
+          </button>
+          <button (click)="navigateToChallengeReview(challengeId)" style="font-weight: 500 !important;"
+            class="bg-indigo-300 hover:bg-indigo-400 px-4 py-2 rounded w-full md:w-auto text-black">
+            Review Answer Sheet
+          </button>
+          <button (click)="redirectToDashboard()" style="font-weight: 500 !important;"
+            class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
+            Go to Dashboard →
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
