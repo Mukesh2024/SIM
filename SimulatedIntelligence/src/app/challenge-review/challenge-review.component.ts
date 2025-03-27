@@ -20,6 +20,7 @@ export class ChallengeReviewComponent implements OnInit {
   totalCorrect: number = 0;
   totalInCorrect: number = 0;
   totalNotAttempt: number = 0;
+  aiExplanationLoader = true;
 
   constructor(
     private recommendationService: RecommendationService,
@@ -57,11 +58,13 @@ export class ChallengeReviewComponent implements OnInit {
   //   });
   // }
 
+
   getQuestions(challengeId: string) {
     this.challengeService.getQuestionsAns(challengeId).subscribe({
       next: (response: any) => {
         this.details = response.details;
         if (response.userAnswer) {
+          //this.options = response.options;
           this.questions = response.userAnswer;
           this.totalCorrect = response.totalCorrect;
           this.totalInCorrect = response.totalInCorrect;
@@ -96,6 +99,7 @@ export class ChallengeReviewComponent implements OnInit {
   updateMainContent(question: any, questionNumber: number): void { }
 
   getRecommendation(questionDetail: any) {
+    this.aiExplanationLoader = true;
     const questionData = {
       guid: this.challengeId,
       grade: this.grade,
@@ -105,6 +109,7 @@ export class ChallengeReviewComponent implements OnInit {
     this.recommendationService.getRecommadation(questionData).subscribe({
       next: (response: string) => {
         this.recommendation = response;
+        this.aiExplanationLoader = false;
       }
     });
   }

@@ -48,6 +48,8 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   timeLeft: string = '';
   private timerInterval: any;
 
+  showResultModalLoader:boolean = false;
+
   ngOnInit(): void {
     if (this.timerInterval) clearInterval(this.timerInterval);
     const challengeId = this.route.snapshot.paramMap.get('id');
@@ -137,7 +139,8 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
   }
 
 
-  openResultModal() {
+  async openResultModal() {
+    this.showResultModalLoader  = true;
     const formattedAnswers = this.questions.map((questionData, index) => {
       return {
         questionText: questionData.questionText,
@@ -153,7 +156,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
       grade: this.grade,
       answers: formattedAnswers
     };
-    this.challengeService.saveUserAnswer(payload).subscribe({
+   await this.challengeService.saveUserAnswer(payload).subscribe({
       next: (response) => {
         this.studentResultDataResponse = response;
         this.studentResultData = {
@@ -168,6 +171,7 @@ export class ChallengeRoomPageComponent implements OnInit, OnDestroy {
         };
         this.showResult = true;
         this.showModal = false;
+        this.showResultModalLoader  = false;
         clearInterval(this.timerInterval);
       },
       error: (err) => {

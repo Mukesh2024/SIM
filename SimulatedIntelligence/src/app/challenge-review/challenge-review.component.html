@@ -1,76 +1,19 @@
-<div class="bg-gray-100 text-gray-900 font-sans min-h-screen flex">
+<div class="w-full flex p-8 wrapper">
 
   <!-- Sidebar -->
-  <aside class="w-64 bg-white shadow-md p-4 border-r border-gray-200 flex flex-col">
+  <aside class="sidebar">
     <!-- Profile -->
-    <div class="mb-6 text-center">
-      <img src="https://i.pravatar.cc/100" alt="User" class="rounded-full w-16 h-16 mx-auto" />
-      <div class="font-semibold mt-2">Harry Potter</div>
-      <div class="text-sm text-green-600">+340 XP</div>
-    </div>
-
-    <!-- Section Label -->
-    <div (click)="toggleSummary()" class="font-semibold text-sm text-gray-600 mb-2">Summary →</div>
-
-    <!-- Mathematics Section -->
-    <div class="mb-6">
-      <div class="flex flex-col gap-2">
-        <button (click)="onSelectQuestion(i)" *ngFor="let question of questions; let i = index"
-          class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm" [ngClass]="{
-                    'hover:bg-green-50': question.status === 'correct',
-                    'hover:bg-yellow-100': question.status === 'pending',
-                    'hover:bg-red-50': question.status === 'incorrect'
-                  }">
-
-          Question {{ i + 1 }}
-
-        </button>
+    <div class="user-profile">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsFikiVeZsqKvKabvMctua-v8sEenvS1P2jw&s" alt="User Avatar" class="user-avatar" />
+      <div class="user-info">
+        <h3 class="username">Harry Potter</h3>
+        <span class="user-stats text-gray-600">
+          +100 XP
+        </span>
       </div>
     </div>
 
-
-  </aside>
-
-  <!-- Main Content -->
-  <main class="flex-1 p-10  shadow-inner">
-    <div class="bg-white p-6 rounded shadow">
-      <h1 class="text-xl font-semibold mb-2">{{details.challengeName}}</h1>
-      <button (click)="redirectToDashboard()" style="font-weight: 500 !important;"
-        class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
-        Go to Dashboard →
-      </button>
-      <div class="bg-white rounded-lg shadow p-6" *ngIf="selectedQuestionDetail">
-        <p class="text-lg font-medium mb-4">
-          <span class="text-gray-500 font-bold">Q.{{index +1}}</span>
-          {{selectedQuestionDetail.questionText}}
-        </p>
-
-        <div class="mb-4">
-          <p *ngIf="selectedQuestionDetail.answer != ''"
-            class="font-semibold {{selectedQuestionDetail.isCorrect?'text-green-700':'red-text'}} ">Your Answer
-            ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
-          <p *ngIf="selectedQuestionDetail.answer != ''"
-            class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">
-        
-           {{selectedQuestionDetail.answer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.answer.toLowerCase()]}}  </p>
-          <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text "> Not Attempted </p>
-        </div>
-
-        <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
-          <p class="font-semibold text-green-700">Correct Answer</p>
-          <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.correctAnswer.toLowerCase()]}} </p>
-        </div>
-
-        <div class="mt-6">
-          <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
-          <div class="text-sm text-gray-700 leading-relaxed">
-            <div [innerHTML]="sanitizedHtml"> </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div ng-if="showSummary" class="bg-white p-6 rounded shadow">
-      <h2 class="text-2xl font-semibold mb-8 border-b pb-2">{{details.challengeName}}</h2>
+    <h2 class="text-xl font-semibold">{{details.challengeName}}</h2>
 
 
       <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
@@ -99,54 +42,68 @@
         </div>
       </div>
 
+    <!-- Mathematics Section -->
+    <div class="mb-6 mt-6">
+      <div class="flex flex-col gap-2">
+        <button (click)="onSelectQuestion(i)" *ngFor="let question of questions; let i = index"
+          class="box-button flex justify-between items-center bg-white border rounded px-3 py-1" [ngClass]="{
+                    'hover:bg-green-50': question.status === 'correct',
+                    'hover:bg-yellow-100': question.status === 'pending',
+                    'hover:bg-red-50': question.status === 'incorrect'
+                  }">
+
+          Question {{ i + 1 }}
+
+        </button>
+      </div>
+    </div>
 
 
-      <!-- Math Section -->
-      <!-- <section class="mb-12">
-        <h3 class="text-xl font-bold mb-4 text-gray-800">Mathematics</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-gray-700 text-lg">
-          <div class="flex justify-between">
-            <span>Questions</span><span class="font-bold">10</span>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="cont relative">
+    <div class="bg-white p-6">
+      <button (click)="redirectToDashboard()" style="font-weight: 500 !important;"
+        class="go-to-btn bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
+        Go to Dashboard →
+      </button>
+      <div class="bg-white" *ngIf="selectedQuestionDetail">
+        <p class="text-lg font-medium mb-4">
+          <span class="text-gray-500 font-bold">Q.{{index +1}}</span>
+          {{selectedQuestionDetail.questionText}}
+        </p>
+        <!-- <div class="flex gap-6 flex-wrap text-lg">
+          <ng-container *ngFor="let key of getOptionKeys(options)">
+            <span><strong>{{ key.toUpperCase() }})</strong> {{ options[key] }}</span>
+          </ng-container>
+        </div> -->
+
+        <div class="mb-4">
+          <p *ngIf="selectedQuestionDetail.answer != ''"
+            class="font-semibold {{selectedQuestionDetail.isCorrect?'text-green-700':'red-text'}} ">Your Answer
+            ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
+          <p *ngIf="selectedQuestionDetail.answer != ''"
+            class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">
+            {{selectedQuestionDetail.answer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.answer.toLowerCase()]}}</p>
+          <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text "> Not Attempted </p>
+        </div>
+
+        <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
+          <p class="font-semibold text-green-700">Correct Answer</p>
+          <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}: {{selectedQuestionDetail.options[selectedQuestionDetail.correctAnswer.toLowerCase()]}}</p>
+        </div>
+
+        <div class="mt-6">
+          <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
+          <div *ngIf="aiExplanationLoader" class="loaderContainer">
+            <div class="loader"></div>
           </div>
-          <div class="flex justify-between">
-            <span>Correct</span><span class="font-bold">7</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Accuracy</span><span class="font-bold text-green-600">70%</span>
-          </div>
-          <div class="flex justify-between">
-            <span>XP Earned</span><span class="font-bold text-yellow-500">70</span>
-          </div>
-          <div class="col-span-1 sm:col-span-2">
-            <span class="block text-sm font-semibold text-gray-500 mb-1">AI Analysis</span>
-            <p class="text-gray-800">Focus on <strong>Probability</strong> and reduce time for quiz.</p>
+          <div *ngIf="!aiExplanationLoader" class="text-sm text-gray-700 leading-relaxed">
+            <div [innerHTML]="sanitizedHtml"> </div>
           </div>
         </div>
-      </section>
-   -->
-      <!-- Physics Section -->
-      <!-- <section class="pt-8 border-t">
-        <h3 class="text-xl font-bold mb-4 text-gray-800">Physics</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-gray-700 text-lg">
-          <div class="flex justify-between">
-            <span>Questions</span><span class="font-bold">10</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Correct</span><span class="font-bold">5</span>
-          </div>
-          <div class="flex justify-between">
-            <span>Accuracy</span><span class="font-bold text-orange-500">50%</span>
-          </div>
-          <div class="flex justify-between">
-            <span>XP Earned</span><span class="font-bold text-yellow-500">70</span>
-          </div>
-          <div class="col-span-1 sm:col-span-2">
-            <span class="block text-sm font-semibold text-gray-500 mb-1">AI Analysis</span>
-            <p class="text-gray-800">Work hard on <strong>Electromagnetism</strong> and <strong>Optics</strong>.</p>
-          </div>
-        </div>
-      </section> -->
+      </div>
     </div>
   </main>
-
 </div>
