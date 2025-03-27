@@ -1,70 +1,76 @@
 <div class="bg-gray-100 text-gray-900 font-sans min-h-screen flex">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-md p-4 border-r border-gray-200 flex flex-col">
-      <!-- Profile -->
-      <div class="mb-6 text-center">
-        <img src="https://i.pravatar.cc/100" alt="User" class="rounded-full w-16 h-16 mx-auto" />
-        <div class="font-semibold mt-2">Harry Potter</div>
-        <div class="text-sm text-green-600">+340 XP</div>
-      </div>
-  
-      <!-- Section Label -->
-      <div (click)="toggleSummary()" class="font-semibold text-sm text-gray-600 mb-2">Summary →</div>
-  
-      <!-- Mathematics Section -->
-      <div class="mb-6">
-        <div class="flex flex-col gap-2">
-          <button   (click)="onSelectQuestion(i)" *ngFor="let question of questions; let i = index" 
-                  class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm" 
-                  [ngClass]="{
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md p-4 border-r border-gray-200 flex flex-col">
+    <!-- Profile -->
+    <div class="mb-6 text-center">
+      <img src="https://i.pravatar.cc/100" alt="User" class="rounded-full w-16 h-16 mx-auto" />
+      <div class="font-semibold mt-2">Harry Potter</div>
+      <div class="text-sm text-green-600">+340 XP</div>
+    </div>
+
+    <!-- Section Label -->
+    <div (click)="toggleSummary()" class="font-semibold text-sm text-gray-600 mb-2">Summary →</div>
+
+    <!-- Mathematics Section -->
+    <div class="mb-6">
+      <div class="flex flex-col gap-2">
+        <button (click)="onSelectQuestion(i)" *ngFor="let question of questions; let i = index"
+          class="flex justify-between items-center bg-white border rounded px-3 py-1 text-sm" [ngClass]="{
                     'hover:bg-green-50': question.status === 'correct',
                     'hover:bg-yellow-100': question.status === 'pending',
                     'hover:bg-red-50': question.status === 'incorrect'
-                  }"
-               >
-                 
-            Question {{ i + 1 }} 
-           
-          </button>
+                  }">
+
+          Question {{ i + 1 }}
+
+        </button>
+      </div>
+    </div>
+
+
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-10  shadow-inner">
+    <div class="bg-white p-6 rounded shadow">
+      <h1 class="text-xl font-semibold mb-2">{{details.challengeName}}</h1>
+      <button (click)="redirectToDashboard()" style="font-weight: 500 !important;"
+        class="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded w-full md:w-auto text-black">
+        Go to Dashboard →
+      </button>
+      <div class="bg-white rounded-lg shadow p-6" *ngIf="selectedQuestionDetail">
+        <p class="text-lg font-medium mb-4">
+          <span class="text-gray-500 font-bold">Q.{{index +1}}</span>
+          {{selectedQuestionDetail.questionText}}
+        </p>
+
+        <div class="mb-4">
+          <p *ngIf="selectedQuestionDetail.answer != ''"
+            class="font-semibold {{selectedQuestionDetail.isCorrect?'text-green-700':'red-text'}} ">Your Answer
+            ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
+          <p *ngIf="selectedQuestionDetail.answer != ''"
+            class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">
+            {{selectedQuestionDetail.answer}}</p>
+          <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text "> Not Attempted </p>
+        </div>
+
+        <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
+          <p class="font-semibold text-green-700">Correct Answer</p>
+          <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}</p>
+        </div>
+
+        <div class="mt-6">
+          <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
+          <div class="text-sm text-gray-700 leading-relaxed">
+            <div [innerHTML]="sanitizedHtml"> </div>
+          </div>
         </div>
       </div>
-      
-  
-    </aside>
-  
-    <!-- Main Content -->
-    <main class="flex-1 p-10  shadow-inner">
-        <div class="bg-white p-6 rounded shadow">
-            <h1 class="text-xl font-semibold mb-2">{{details.challengeName}}</h1>
-                <div class="bg-white rounded-lg shadow p-6" *ngIf="selectedQuestionDetail">
-                  <p class="text-lg font-medium mb-4">
-                    <span class="text-gray-500 font-bold">Q.{{index +1}}</span>
-                    {{selectedQuestionDetail.questionText}}
-                  </p>
-          
-                  <div class="mb-4" >
-                    <p *ngIf="selectedQuestionDetail.answer != ''" class="font-semibold {{selectedQuestionDetail.isCorrect?'text-green-700':'red-text'}} ">Your Answer ({{selectedQuestionDetail.isCorrect?'Correct':'Wrong'}})</p>
-                    <p *ngIf="selectedQuestionDetail.answer != ''" class="{{selectedQuestionDetail.isCorrect?'bg-green-500':'red'}} text-white px-4 py-2 rounded w-100">  {{selectedQuestionDetail.answer}}</p>
-                    <p *ngIf="selectedQuestionDetail.answer == ''" class="font-semibold grey-text ">  Not Attempted </p>
-                  </div>
-          
-                  <div class="mb-4" *ngIf="selectedQuestionDetail.answer != ''">
-                    <p class="font-semibold text-green-700">Correct Answer</p>
-                    <p class="bg-green-500 text-white px-4 py-2 rounded w-100">{{selectedQuestionDetail.correctAnswer}}</p>
-                  </div>
-          
-                  <div class="mt-6" >
-                    <h2 class="text-lg font-semibold mb-2">AI Explanation</h2>
-                    <div class="text-sm text-gray-700 leading-relaxed">
-                      <div [innerHTML]="sanitizedHtml"> </div>
-                    </div>
-                  </div>
-                </div>
-        </div>
+    </div>
     <div ng-if="showSummary" class="bg-white p-6 rounded shadow">
       <h2 class="text-2xl font-semibold mb-8 border-b pb-2">{{details.challengeName}}</h2>
-  
+
 
       <div class="flex flex-col md:flex-row justify-between gap-8 mt-4">
         <!-- Result Summary -->
@@ -72,10 +78,12 @@
           <h3 class="font-semibold text-gray-800 mb-4">Result Summary</h3>
           <ul class="text-gray-700 space-y-2">
             <li class="flex justify-between">
-              <span>Max. Marks</span><span class="font-semibold">{{ questions.length * details.totalMarksOfEachAnswer}}</span>
+              <span>Max. Marks</span><span class="font-semibold">{{ questions.length *
+                details.totalMarksOfEachAnswer}}</span>
             </li>
             <li class="flex justify-between">
-              <span>Mark Obtained</span><span class="font-semibold">{{details.totalMarksOfEachAnswer * totalCorrect }}</span>
+              <span>Mark Obtained</span><span class="font-semibold">{{details.totalMarksOfEachAnswer * totalCorrect
+                }}</span>
             </li>
             <li class="flex justify-between">
               <span>Incorrect Answers</span><span class="font-semibold">{{totalInCorrect }}</span>
@@ -138,7 +146,6 @@
         </div>
       </section> -->
     </div>
-    </main>
-  
-  </div>
-  
+  </main>
+
+</div>

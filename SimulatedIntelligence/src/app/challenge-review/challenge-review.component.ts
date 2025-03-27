@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecommendationService } from '../component/services/recomondation.service';
 import { ChallengeService } from '../component/services/challenge.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -17,16 +17,17 @@ export class ChallengeReviewComponent implements OnInit {
   index: number = 0;
   selectedQuestionDetail: any = null;
   grade: any;
-  totalCorrect:number = 0;
-  totalInCorrect :number = 0;
-  totalNotAttempt :number = 0;
+  totalCorrect: number = 0;
+  totalInCorrect: number = 0;
+  totalNotAttempt: number = 0;
 
   constructor(
     private recommendationService: RecommendationService,
     private challengeService: ChallengeService,
     private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
-  ) {}
+    private sanitizer: DomSanitizer,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.challengeId = this.route.snapshot.paramMap.get('id');
@@ -62,9 +63,10 @@ export class ChallengeReviewComponent implements OnInit {
         this.details = response.details;
         if (response.userAnswer) {
           this.questions = response.userAnswer;
-          this.totalCorrect = response.totalCorrect ;
-          this.totalInCorrect = response.totalInCorrect ;
-          this.totalNotAttempt = response.totalNotAttempt ;
+          this.totalCorrect = response.totalCorrect;
+          this.totalInCorrect = response.totalInCorrect;
+          this.totalNotAttempt = response.totalNotAttempt;
+          this.grade = response.details.grade;
           this.onSelectQuestion(0);
         } else {
           console.error('Invalid response structure', response);
@@ -91,18 +93,18 @@ export class ChallengeReviewComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(this.recommendation);
   }
 
-  updateMainContent(question: any, questionNumber: number): void {}
+  updateMainContent(question: any, questionNumber: number): void { }
 
   getRecommendation(questionDetail: any) {
     const questionData = {
       guid: this.challengeId,
-      grade: 'Grade-1',
+      grade: this.grade,
       questionDetail: questionDetail,
     };
 
     this.recommendationService.getRecommadation(questionData).subscribe({
       next: (response: string) => {
-        this.recommendation =  response;
+        this.recommendation = response;
       }
     });
   }
@@ -110,4 +112,10 @@ export class ChallengeReviewComponent implements OnInit {
   toggleSummary() {
     this.showSummary = !this.showSummary;
   }
+
+  redirectToDashboard() {
+    this.router.navigate(['']);
+  }
+
+
 }

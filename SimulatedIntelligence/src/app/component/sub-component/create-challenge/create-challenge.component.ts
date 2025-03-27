@@ -36,7 +36,7 @@ export class CreateChallengeComponent {
   ];
 
   selectedTopic: string = "";
-  selectedGrade: string = "Grade-1";
+  selectedGrade: string = "Grade-9";
   selectedDifficulty: number = 0;
   numOfQuestion: number = 5;
   correctMarks: number = 1;
